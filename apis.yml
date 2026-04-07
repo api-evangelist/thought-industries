@@ -8,8 +8,8 @@ position: Consumer
 access: 3rd-Party
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Learning
   - Education
+  - Learning
   - LMS
 created: '2025-03-01'
 modified: '2026-03-16'
@@ -27,8 +27,8 @@ apis:
     humanURL: https://developer.thoughtindustries.com/
     baseURL: https://api.thoughtindustries.com
     tags:
-      - Learning
       - Education
+      - Learning
       - LMS
     properties:
       - type: Documentation
