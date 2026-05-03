@@ -1,0 +1,141 @@
+name: Thought Industries Vocabulary
+description: >-
+  Domain vocabulary for Thought Industries B2B learning platform covering
+  LMS concepts, API integration patterns, and learning management terminology.
+version: '1.0'
+created: '2026-05-03'
+modified: '2026-05-03'
+tags:
+  - Education
+  - Learning
+  - LMS
+
+terms:
+  - term: Tenant
+    definition: >-
+      An isolated instance of the Thought Industries platform for a single
+      customer organization, identified by a unique subdomain. API keys and
+      data are scoped to the tenant.
+    related:
+      - Subdomain
+      - API Key
+    tags:
+      - Platform
+      - Multi-Tenancy
+
+  - term: Learner
+    definition: >-
+      An individual user who enrolls in and consumes learning content on
+      the Thought Industries platform. Managed via the /users REST API endpoint.
+    related:
+      - Enrollment
+      - Course
+      - Group
+    tags:
+      - Learning
+      - Users
+
+  - term: Course
+    definition: >-
+      A structured learning experience consisting of modules, lessons, and
+      assessments. Courses have statuses (draft, published, archived) and
+      can be enrolled in by learners.
+    related:
+      - Enrollment
+      - Content
+      - Category
+    tags:
+      - Learning
+      - Content
+
+  - term: Learning Path
+    definition: >-
+      A curated sequence of courses, content items, or other learning resources
+      grouped together to guide learners through a structured curriculum.
+    related:
+      - Course
+      - Enrollment
+    tags:
+      - Learning
+      - Curriculum
+
+  - term: Enrollment
+    definition: >-
+      A record linking a learner to a course, tracking their access, progress,
+      and completion status. Statuses include enrolled, in_progress, and completed.
+    related:
+      - Course
+      - Learner
+      - Progress
+    tags:
+      - Learning
+      - Tracking
+
+  - term: Progress
+    definition: >-
+      A percentage value (0-100) indicating how much of a course a learner
+      has completed. Tracked per enrollment record.
+    related:
+      - Enrollment
+      - Completion
+    tags:
+      - Learning
+      - Tracking
+
+  - term: Group
+    definition: >-
+      A collection of learners organized together, enabling bulk enrollment,
+      access control, and reporting segmentation.
+    related:
+      - Learner
+      - Enrollment
+    tags:
+      - Learning
+      - Organization
+
+  - term: Panorama
+    definition: >-
+      Thought Industries' extended enrollment type supporting external learner
+      experiences. Panorama enrollments are tracked separately from main site
+      enrollments in reporting.
+    related:
+      - Enrollment
+      - Learning Path
+    tags:
+      - Platform
+      - Enrollment
+
+  - term: API Key
+    definition: >-
+      A unique secret string used to authenticate API requests to the Thought
+      Industries REST API, passed via X-API-Key header or apiKey query parameter.
+      Scoped to the tenant.
+    related:
+      - Authentication
+      - Tenant
+    tags:
+      - API
+      - Authentication
+
+  - term: GraphQL
+    definition: >-
+      Thought Industries' alternative API interface available at
+      /incoming/api/graphql, supporting flexible queries and mutations
+      via schema introspection.
+    related:
+      - REST API
+      - API
+    tags:
+      - API
+      - GraphQL
+
+  - term: Webhook
+    definition: >-
+      An HTTP callback that Thought Industries sends to a configured URL
+      when platform events occur (user.created, user.enrolled, course.completed, etc.).
+    related:
+      - Events
+      - Integration
+    tags:
+      - API
+      - Integration

@@ -1,0 +1,61 @@
+{
+  "title": "Thought Industries User Structure",
+  "description": "Structure documentation for Thought Industries user and enrollment data.",
+  "version": "1.0",
+  "structures": {
+    "User": {
+      "description": "Learner user account in the Thought Industries platform.",
+      "fields": {
+        "id": { "type": "string", "required": true, "description": "Unique user identifier" },
+        "email": { "type": "string", "required": true, "description": "User email address, unique per tenant" },
+        "first_name": { "type": "string", "required": false, "description": "User first name" },
+        "last_name": { "type": "string", "required": false, "description": "User last name" },
+        "active": { "type": "boolean", "required": false, "description": "Account active status" },
+        "created_at": { "type": "string", "required": false, "description": "ISO 8601 creation timestamp" },
+        "updated_at": { "type": "string", "required": false, "description": "ISO 8601 last update timestamp" },
+        "custom_fields": { "type": "object", "required": false, "description": "Tenant-specific custom fields" }
+      }
+    },
+    "Enrollment": {
+      "description": "Course enrollment linking user to course with progress tracking.",
+      "fields": {
+        "id": { "type": "string", "required": true, "description": "Unique enrollment identifier" },
+        "user_id": { "type": "string", "required": true, "description": "Enrolled user ID" },
+        "course_id": { "type": "string", "required": true, "description": "Course being enrolled in" },
+        "status": { "type": "string", "required": true, "description": "enrolled | in_progress | completed" },
+        "progress": { "type": "number", "required": false, "description": "Completion percentage 0-100" },
+        "enrolled_at": { "type": "string", "required": false, "description": "ISO 8601 enrollment timestamp" },
+        "completed_at": { "type": "string|null", "required": false, "description": "ISO 8601 completion timestamp" }
+      }
+    },
+    "Course": {
+      "description": "Learning course in the Thought Industries catalog.",
+      "fields": {
+        "id": { "type": "string", "required": true, "description": "Unique course identifier" },
+        "title": { "type": "string", "required": false, "description": "Course title" },
+        "description": { "type": "string", "required": false, "description": "Course description" },
+        "status": { "type": "string", "required": false, "description": "published | draft | archived" },
+        "category_id": { "type": "string", "required": false, "description": "Category identifier" },
+        "created_at": { "type": "string", "required": false, "description": "ISO 8601 creation timestamp" },
+        "updated_at": { "type": "string", "required": false, "description": "ISO 8601 last update timestamp" }
+      }
+    },
+    "PaginatedResponse": {
+      "description": "Standard paginated list response wrapper.",
+      "fields": {
+        "data": { "type": "array", "required": true, "description": "Array of result objects" },
+        "meta": {
+          "type": "object",
+          "required": true,
+          "description": "Pagination metadata",
+          "fields": {
+            "total": { "type": "integer", "description": "Total record count" },
+            "page": { "type": "integer", "description": "Current page number" },
+            "per_page": { "type": "integer", "description": "Records per page" },
+            "total_pages": { "type": "integer", "description": "Total page count" }
+          }
+        }
+      }
+    }
+  }
+}

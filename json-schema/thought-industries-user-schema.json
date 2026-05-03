@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thoughtindustries.com/schemas/user",
+  "title": "User",
+  "description": "A learner user account in the Thought Industries platform.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique user identifier."
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "User email address. Must be unique per tenant."
+    },
+    "first_name": {
+      "type": "string",
+      "description": "User's first name."
+    },
+    "last_name": {
+      "type": "string",
+      "description": "User's last name."
+    },
+    "active": {
+      "type": "boolean",
+      "description": "Whether the user account is active. Deactivated users cannot enroll or access content.",
+      "default": true
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of account creation."
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of last update."
+    },
+    "custom_fields": {
+      "type": "object",
+      "description": "Tenant-specific custom field values.",
+      "additionalProperties": true
+    }
+  },
+  "required": ["id", "email"],
+  "additionalProperties": false
+}

@@ -1,0 +1,79 @@
+extends: spectral:oas
+rules:
+  # Thought Industries API-specific Spectral rules
+
+  thought-industries-operation-summary-title-case:
+    description: All operation summaries must use Title Case.
+    message: "Operation summary '{{value}}' should use Title Case."
+    severity: warn
+    given: "$.paths[*][*].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^([A-Z][a-z0-9]*([ -][A-Z0-9][a-z0-9]*)*)$"
+
+  thought-industries-pagination-params:
+    description: List operations should support page and per_page parameters.
+    message: "GET list operations should support page and per_page query parameters."
+    severity: warn
+    given: "$.paths[*][get]"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          properties:
+            operationId:
+              pattern: "^list"
+
+  thought-industries-auth-header-documented:
+    description: API key authentication must be documented via X-API-Key header or apiKey query.
+    message: "Operations must reference either ApiKeyHeader or ApiKeyQuery security scheme."
+    severity: error
+    given: "$.components.securitySchemes"
+    then:
+      function: truthy
+
+  thought-industries-request-body-json:
+    description: POST/PUT operations must use application/json content type.
+    message: "POST/PUT request bodies must use application/json."
+    severity: error
+    given: "$.paths[*][post,put].requestBody.content"
+    then:
+      field: application/json
+      function: truthy
+
+  thought-industries-response-data-wrapper:
+    description: Successful responses should wrap data in a data property.
+    message: "Responses should use a data wrapper property following Thought Industries conventions."
+    severity: warn
+    given: "$.paths[*][*].responses.200.content.application/json.schema.properties"
+    then:
+      field: data
+      function: truthy
+
+  thought-industries-tag-defined:
+    description: All operations must have at least one tag.
+    message: "Operations must have at least one tag for categorization."
+    severity: error
+    given: "$.paths[*][get,post,put,delete]"
+    then:
+      field: tags
+      function: truthy
+
+  thought-industries-path-resource-plural:
+    description: Collection paths should use plural resource names.
+    message: "Collection path segments should use plural nouns (e.g., /users, /courses)."
+    severity: warn
+    given: "$.paths"
+    then:
+      function: truthy
+
+  thought-industries-operation-id-camel-case:
+    description: Operation IDs must use camelCase.
+    message: "Operation ID '{{value}}' should use camelCase."
+    severity: warn
+    given: "$.paths[*][*].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"

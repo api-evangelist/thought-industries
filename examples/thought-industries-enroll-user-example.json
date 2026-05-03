@@ -1,0 +1,27 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://yourtenant.thoughtindustries.com/incoming/api/v1/courses/crs_xyz789/enrollments",
+    "headers": {
+      "X-API-Key": "YOUR_API_KEY",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "user_id": "usr_abc123"
+    }
+  },
+  "response": {
+    "status": 201,
+    "body": {
+      "data": {
+        "id": "enr_1a2b3c",
+        "user_id": "usr_abc123",
+        "course_id": "crs_xyz789",
+        "status": "enrolled",
+        "progress": 0.0,
+        "enrolled_at": "2026-05-03T11:00:00Z",
+        "completed_at": null
+      }
+    }
+  }
+}

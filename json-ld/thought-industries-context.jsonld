@@ -1,0 +1,26 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "ti": "https://thoughtindustries.com/vocab#",
+    "Course": "Course",
+    "User": "Person",
+    "Enrollment": "ti:Enrollment",
+    "Group": "ti:LearnerGroup",
+    "LearningPath": "ti:LearningPath",
+    "ContentItem": "LearningResource",
+    "email": "email",
+    "first_name": "givenName",
+    "last_name": "familyName",
+    "active": "ti:accountActive",
+    "course_id": "courseId",
+    "user_id": "ti:learnerId",
+    "status": "ti:enrollmentStatus",
+    "progress": "ti:completionPercentage",
+    "enrolled_at": "startDate",
+    "completed_at": "endDate",
+    "category_id": "about",
+    "custom_fields": "ti:customAttributes",
+    "per_page": "ti:pageSize",
+    "total_pages": "ti:totalPages"
+  }
+}

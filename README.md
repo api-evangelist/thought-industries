@@ -1,63 +1,87 @@
-# Thought Industries (thought-industries)
-The Thought Industries APIs allow for programmatic access to Thought Industries tools and services via REST and GraphQL APIs.
+# Thought Industries
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/thought-industries/refs/heads/main/apis.yml)
+Thought Industries is a B2B learning platform (LMS/LXP) providing REST and GraphQL APIs for programmatic access to courses, users, enrollments, content management, and reporting. Their developer portal enables integration of learning experiences into enterprise workflows.
 
-## Scope
-
-- **Type:** Index 
-- **Position:** Consuming 
-- **Access:** 3rd-Party 
-
-## Tags:
-
- - Learning, Education, LMS
-
-## Timestamps
-
-- **Created:** 2025-03-01 
-- **Modified:** 2026-03-16 
+**Developer Portal:** [https://developer.thoughtindustries.com/](https://developer.thoughtindustries.com/)
 
 ## APIs
 
-### Thought Industries REST API
-The Thought Industries REST API allows for programmatic access to Thought Industries tools and services. Use these APIs to retrieve information about events within your school, create and change resources, and use core Thought Industries tools and services.
+| Name | Description | Documentation |
+|------|-------------|---------------|
+| [Thought Industries REST API](https://developer.thoughtindustries.com/) | REST API v1 for users, courses, enrollments, groups, content, categories, and reporting. | [Docs](https://api.thoughtindustries.com/) |
+| [Thought Industries GraphQL API](https://developer.thoughtindustries.com/graphql/) | GraphQL API for flexible querying of platform data with schema introspection. | [Docs](https://developer.thoughtindustries.com/graphql/) |
 
-**Human URL:** [https://developer.thoughtindustries.com/](https://developer.thoughtindustries.com/)
+## Common Resources
 
+- **Website:** [https://www.thoughtindustries.com/](https://www.thoughtindustries.com/)
+- **Developer Portal:** [https://developer.thoughtindustries.com/](https://developer.thoughtindustries.com/)
+- **Getting Started:** [https://developer.thoughtindustries.com/api-tutorials/](https://developer.thoughtindustries.com/api-tutorials/)
+- **GitHub Organization:** [https://github.com/thoughtindustries](https://github.com/thoughtindustries)
 
-#### Tags:
+## OpenAPI Specifications
 
- - Learning, Education, LMS
+| File | Description |
+|------|-------------|
+| [thought-industries-openapi.yml](openapi/thought-industries-openapi.yml) | REST API v1 covering users, courses, enrollments, groups, content, and reports |
 
-#### Properties
+## JSON Schemas
 
-- [Documentation](https://api.thoughtindustries.com/)
-- [Getting Started](https://developer.thoughtindustries.com/api-tutorials/)
+| File | Description |
+|------|-------------|
+| [thought-industries-user-schema.json](json-schema/thought-industries-user-schema.json) | Learner user account schema |
+| [thought-industries-enrollment-schema.json](json-schema/thought-industries-enrollment-schema.json) | Course enrollment schema |
 
-### Thought Industries GraphQL API
-The Thought Industries GraphQL API enables developers to extend experiences using native GraphQL queries and mutations.
+## JSON Structures
 
-**Human URL:** [https://developer.thoughtindustries.com/graphql/](https://developer.thoughtindustries.com/graphql/)
+| File | Description |
+|------|-------------|
+| [thought-industries-user-structure.json](json-structure/thought-industries-user-structure.json) | User, enrollment, course, and response structure documentation |
 
+## JSON-LD
 
-#### Tags:
+| File | Description |
+|------|-------------|
+| [thought-industries-context.jsonld](json-ld/thought-industries-context.jsonld) | JSON-LD context mapping LMS vocabulary to schema.org |
 
- - GraphQL, Learning
+## Examples
 
-#### Properties
+| File | Description |
+|------|-------------|
+| [thought-industries-list-users-example.json](examples/thought-industries-list-users-example.json) | List users request/response |
+| [thought-industries-enroll-user-example.json](examples/thought-industries-enroll-user-example.json) | Enroll user request/response |
 
-- [Documentation](https://developer.thoughtindustries.com/graphql/)
+## Spectral Rules
 
-## Common Properties
+| File | Description |
+|------|-------------|
+| [thought-industries-rules.yml](rules/thought-industries-rules.yml) | Spectral ruleset enforcing Thought Industries API conventions |
 
-- [Website](https://www.thoughtindustries.com/)
-- [Documentation](https://developer.thoughtindustries.com/)
-- [Getting Started](https://developer.thoughtindustries.com/api-tutorials/)
-- [GitHub Organization](https://github.com/thoughtindustries)
+## Naftiko Capabilities
+
+### Shared Definitions
+
+| File | Description |
+|------|-------------|
+| [capabilities/shared/rest-api.yaml](capabilities/shared/rest-api.yaml) | Per-API consumed definition for Thought Industries REST API |
+
+### Workflow Capabilities
+
+| File | Description | Tools |
+|------|-------------|-------|
+| [capabilities/learning-management.yaml](capabilities/learning-management.yaml) | Learning management for users, courses, enrollments, groups, and reporting | 12 tools |
+
+## Vocabulary
+
+| File | Description |
+|------|-------------|
+| [thought-industries-vocabulary.yml](vocabulary/thought-industries-vocabulary.yml) | Domain vocabulary for LMS and learning management concepts |
 
 ## Maintainers
 
 **FN:** Kin Lane
 
 **Email:** kin@apievangelist.com
+
+---
+
+*Profiled by [API Evangelist](https://apievangelist.com) on 2026-05-03*

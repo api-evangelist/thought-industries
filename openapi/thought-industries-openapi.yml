@@ -1,0 +1,736 @@
+openapi: 3.1.0
+info:
+  title: Thought Industries REST API
+  description: >-
+    The Thought Industries REST API v1 provides programmatic access to the
+    Thought Industries B2B learning platform. Enables management of users,
+    courses, enrollments, groups, content, categories, bundles, and reporting.
+    Authentication uses API key via X-API-Key header or apiKey query parameter.
+    Base URL is tenant-scoped per subdomain.
+  version: '1.0'
+  contact:
+    url: https://developer.thoughtindustries.com/
+  termsOfService: https://www.thoughtindustries.com/
+  license:
+    name: Commercial
+    url: https://www.thoughtindustries.com/
+externalDocs:
+  description: Thought Industries Developer Portal
+  url: https://developer.thoughtindustries.com/
+servers:
+  - url: https://{subdomain}.thoughtindustries.com/incoming/api/v1
+    description: Thought Industries REST API v1 (tenant-scoped)
+    variables:
+      subdomain:
+        default: yourtenant
+        description: Your Thought Industries tenant subdomain
+security:
+  - ApiKeyHeader: []
+  - ApiKeyQuery: []
+tags:
+  - name: Users
+    description: User lifecycle management
+  - name: Courses
+    description: Course management and content
+  - name: Enrollments
+    description: Course enrollment management
+  - name: Groups
+    description: User group management
+  - name: Content
+    description: Learning content and categories
+  - name: Reports
+    description: Analytics and reporting
+paths:
+  /users:
+    get:
+      operationId: listUsers
+      summary: List Users
+      description: >-
+        Returns a paginated list of all users in the tenant. Default page
+        size is 25. Use page and per_page parameters for pagination.
+      tags:
+        - Users
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+          description: Page number for pagination.
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 25
+            maximum: 100
+          description: Number of records per page (max 100).
+        - name: email
+          in: query
+          schema:
+            type: string
+          description: Filter users by email address.
+      responses:
+        '200':
+          description: List of users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserListResponse'
+        '401':
+          description: Unauthorized - invalid or missing API key
+    post:
+      operationId: createUser
+      summary: Create User
+      description: Creates a new user in the tenant. Email must be unique per tenant.
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserRequest'
+      responses:
+        '201':
+          description: User created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '422':
+          description: Validation error - email already exists
+  /users/{id}:
+    get:
+      operationId: getUser
+      summary: Get User
+      description: Returns details for a single user by ID.
+      tags:
+        - Users
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: User ID.
+      responses:
+        '200':
+          description: User details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '404':
+          description: User not found
+    put:
+      operationId: updateUser
+      summary: Update User
+      description: >-
+        Updates a user record. Full object replacement semantics apply.
+        To deactivate a user, set active to false.
+      tags:
+        - Users
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: User ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserRequest'
+      responses:
+        '200':
+          description: User updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+    delete:
+      operationId: deleteUser
+      summary: Delete User
+      description: Permanently deletes a user. Deactivation is preferred over deletion.
+      tags:
+        - Users
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: User ID.
+      responses:
+        '204':
+          description: User deleted
+  /users/{id}/enrollments:
+    get:
+      operationId: getUserEnrollments
+      summary: Get User Enrollments
+      description: Returns course enrollment data for a specific user.
+      tags:
+        - Enrollments
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: User ID.
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 25
+      responses:
+        '200':
+          description: User enrollments
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnrollmentListResponse'
+  /courses:
+    get:
+      operationId: listCourses
+      summary: List Courses
+      description: Returns a paginated list of all courses in the tenant.
+      tags:
+        - Courses
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 25
+            maximum: 100
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum:
+              - published
+              - draft
+              - archived
+          description: Filter by course status.
+      responses:
+        '200':
+          description: List of courses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CourseListResponse'
+  /courses/{courseId}:
+    get:
+      operationId: getCourse
+      summary: Get Course
+      description: Returns details for a specific course.
+      tags:
+        - Courses
+      parameters:
+        - name: courseId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Course ID.
+      responses:
+        '200':
+          description: Course details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CourseResponse'
+  /courses/{courseId}/enrollments:
+    post:
+      operationId: enrollUser
+      summary: Enroll User in Course
+      description: >-
+        Enrolls a user in a course. The course must be published and
+        the user must be active before calling this endpoint.
+      tags:
+        - Enrollments
+      parameters:
+        - name: courseId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Course ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnrollUserRequest'
+      responses:
+        '201':
+          description: Enrollment created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnrollmentResponse'
+        '422':
+          description: Course not published or user not active
+  /courses/{courseId}/enrollments/bulk-remove:
+    post:
+      operationId: bulkRemoveEnrollments
+      summary: Bulk Remove User Access
+      description: >-
+        Removes access for multiple learners from a course or learning path
+        without affecting their existing access elsewhere.
+      tags:
+        - Enrollments
+      parameters:
+        - name: courseId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Course ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkRemoveRequest'
+      responses:
+        '200':
+          description: Bulk removal completed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkOperationResponse'
+  /groups:
+    get:
+      operationId: listGroups
+      summary: List Groups
+      description: Returns a paginated list of all user groups.
+      tags:
+        - Groups
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 25
+      responses:
+        '200':
+          description: List of groups
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupListResponse'
+  /groups/{groupId}/users:
+    post:
+      operationId: addUserToGroup
+      summary: Add User to Group
+      description: Assigns a user to an existing group.
+      tags:
+        - Groups
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Group ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddUserToGroupRequest'
+      responses:
+        '201':
+          description: User added to group
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupMembershipResponse'
+  /content:
+    get:
+      operationId: listContent
+      summary: List Content
+      description: Returns a paginated list of learning content items.
+      tags:
+        - Content
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 25
+        - name: content_type
+          in: query
+          schema:
+            type: string
+          description: Filter by content type.
+      responses:
+        '200':
+          description: List of content items
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContentListResponse'
+  /categories:
+    get:
+      operationId: listCategories
+      summary: List Categories
+      description: Returns all content categories defined in the tenant.
+      tags:
+        - Content
+      responses:
+        '200':
+          description: List of categories
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryListResponse'
+  /reports/learning-path-actions:
+    get:
+      operationId: getLearningPathActionsReport
+      summary: Get Learning Path Actions Report
+      description: >-
+        Returns learning path enrollment actions including Panorama enrollments
+        and main site enrollments.
+      tags:
+        - Reports
+      parameters:
+        - name: start_date
+          in: query
+          schema:
+            type: string
+            format: date
+          description: Report start date.
+        - name: end_date
+          in: query
+          schema:
+            type: string
+            format: date
+          description: Report end date.
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+      responses:
+        '200':
+          description: Learning path actions report
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportResponse'
+components:
+  securitySchemes:
+    ApiKeyHeader:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: API key passed as X-API-Key request header.
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: apiKey
+      description: API key passed as apiKey query parameter.
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+          format: email
+        first_name:
+          type: string
+        last_name:
+          type: string
+        active:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        custom_fields:
+          type: object
+          additionalProperties: true
+    UserListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    UserResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/User'
+    CreateUserRequest:
+      type: object
+      required:
+        - email
+      properties:
+        email:
+          type: string
+          format: email
+        first_name:
+          type: string
+        last_name:
+          type: string
+        active:
+          type: boolean
+          default: true
+        custom_fields:
+          type: object
+          additionalProperties: true
+    UpdateUserRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        first_name:
+          type: string
+        last_name:
+          type: string
+        active:
+          type: boolean
+        custom_fields:
+          type: object
+          additionalProperties: true
+    Course:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum:
+            - published
+            - draft
+            - archived
+        category_id:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    CourseListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Course'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    CourseResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Course'
+    Enrollment:
+      type: object
+      properties:
+        id:
+          type: string
+        user_id:
+          type: string
+        course_id:
+          type: string
+        status:
+          type: string
+          enum:
+            - enrolled
+            - in_progress
+            - completed
+        progress:
+          type: number
+          format: float
+          description: Completion percentage (0-100)
+        enrolled_at:
+          type: string
+          format: date-time
+        completed_at:
+          type: string
+          format: date-time
+    EnrollmentListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Enrollment'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    EnrollmentResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Enrollment'
+    EnrollUserRequest:
+      type: object
+      required:
+        - user_id
+      properties:
+        user_id:
+          type: string
+          description: The ID of the user to enroll.
+    BulkRemoveRequest:
+      type: object
+      required:
+        - user_ids
+      properties:
+        user_ids:
+          type: array
+          items:
+            type: string
+          description: List of user IDs to remove access from.
+    BulkOperationResponse:
+      type: object
+      properties:
+        removed:
+          type: integer
+        failed:
+          type: integer
+        errors:
+          type: array
+          items:
+            type: string
+    Group:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        member_count:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+    GroupListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    AddUserToGroupRequest:
+      type: object
+      required:
+        - user_id
+      properties:
+        user_id:
+          type: string
+          description: The ID of the user to add to the group.
+    GroupMembershipResponse:
+      type: object
+      properties:
+        user_id:
+          type: string
+        group_id:
+          type: string
+        added_at:
+          type: string
+          format: date-time
+    ContentItem:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        content_type:
+          type: string
+        category_id:
+          type: string
+        status:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+    ContentListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentItem'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    Category:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        parent_id:
+          type: string
+    CategoryListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Category'
+    ReportResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    PaginationMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total_pages:
+          type: integer
