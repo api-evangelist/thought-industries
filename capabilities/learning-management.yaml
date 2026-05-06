@@ -1,315 +1,548 @@
-naftiko: "1.0.0-alpha1"
-
+naftiko: 1.0.0-alpha2
 info:
-  label: "Thought Industries Learning Management"
-  description: >-
-    Unified learning management capability combining user lifecycle, course
-    administration, enrollment management, and reporting for B2B learning
-    platforms. Used by L&D teams, platform administrators, and HR integration
-    workflows to manage learner experiences at scale.
+  label: Thought Industries Learning Management
+  description: Unified learning management capability combining user lifecycle, course administration, enrollment management,
+    and reporting for B2B learning platforms. Used by L&D teams, platform administrators, and HR integration workflows to
+    manage learner experiences at scale.
   tags:
-    - Education
-    - Learning
-    - LMS
-    - LXP
-    - Training
-    - HR Integration
-  created: "2026-05-03"
-  modified: "2026-05-03"
-
+  - Education
+  - Learning
+  - LMS
+  - LXP
+  - Training
+  - HR Integration
+  created: '2026-05-03'
+  modified: '2026-05-06'
 binds:
-  - namespace: env
-    keys:
-      THOUGHT_INDUSTRIES_API_KEY: THOUGHT_INDUSTRIES_API_KEY
-
+- namespace: env
+  keys:
+    THOUGHT_INDUSTRIES_API_KEY: THOUGHT_INDUSTRIES_API_KEY
 capability:
   consumes:
-    - import: thought-industries
-      location: ./shared/rest-api.yaml
-
+  - type: http
+    namespace: thought-industries
+    baseUri: https://{subdomain}.thoughtindustries.com/incoming/api/v1
+    description: Thought Industries REST API v1
+    authentication:
+      type: apikey
+      key: X-API-Key
+      value: '{{THOUGHT_INDUSTRIES_API_KEY}}'
+      placement: header
+    resources:
+    - name: users
+      path: /users
+      description: User lifecycle management
+      operations:
+      - name: list-users
+        method: GET
+        description: List all users with pagination
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+          required: false
+          description: Page number
+        - name: per_page
+          in: query
+          type: integer
+          required: false
+          description: Records per page (max 100)
+        - name: email
+          in: query
+          type: string
+          required: false
+          description: Filter by email address
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-user
+        method: POST
+        description: Create a new user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            email: '{{tools.email}}'
+            first_name: '{{tools.first_name}}'
+            last_name: '{{tools.last_name}}'
+            active: '{{tools.active}}'
+      - name: get-user
+        method: GET
+        description: Get a single user by ID
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: User ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: update-user
+        method: PUT
+        description: Update a user record
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: User ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            active: '{{tools.active}}'
+            first_name: '{{tools.first_name}}'
+            last_name: '{{tools.last_name}}'
+    - name: courses
+      path: /courses
+      description: Course management
+      operations:
+      - name: list-courses
+        method: GET
+        description: List all courses
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+          required: false
+          description: Page number
+        - name: per_page
+          in: query
+          type: integer
+          required: false
+          description: Records per page
+        - name: status
+          in: query
+          type: string
+          required: false
+          description: Filter by status (published, draft, archived)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-course
+        method: GET
+        description: Get a specific course
+        inputParameters:
+        - name: courseId
+          in: path
+          type: string
+          required: true
+          description: Course ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: enrollments
+      path: /courses/{courseId}/enrollments
+      description: Course enrollment management
+      operations:
+      - name: get-user-enrollments
+        method: GET
+        description: Get enrollments for a user
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: User ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: enroll-user
+        method: POST
+        description: Enroll a user in a course
+        inputParameters:
+        - name: courseId
+          in: path
+          type: string
+          required: true
+          description: Course ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            user_id: '{{tools.user_id}}'
+      - name: bulk-remove-enrollments
+        method: POST
+        description: Bulk remove user access from a course
+        inputParameters:
+        - name: courseId
+          in: path
+          type: string
+          required: true
+          description: Course ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            user_ids: '{{tools.user_ids}}'
+    - name: groups
+      path: /groups
+      description: User group management
+      operations:
+      - name: list-groups
+        method: GET
+        description: List all user groups
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+          required: false
+          description: Page number
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: add-user-to-group
+        method: POST
+        description: Add a user to a group
+        inputParameters:
+        - name: groupId
+          in: path
+          type: string
+          required: true
+          description: Group ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            user_id: '{{tools.user_id}}'
+    - name: reports
+      path: /reports
+      description: Analytics and reporting
+      operations:
+      - name: get-learning-path-actions-report
+        method: GET
+        description: Get learning path actions report
+        inputParameters:
+        - name: start_date
+          in: query
+          type: string
+          required: false
+          description: Report start date
+        - name: end_date
+          in: query
+          type: string
+          required: false
+          description: Report end date
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
   exposes:
-    - type: rest
-      port: 8080
-      namespace: learning-management-api
-      description: "Unified REST API for learning management workflows."
-      resources:
-        - path: /v1/users
-          name: users
-          description: Learner user management
-          operations:
-            - method: GET
-              name: list-users
-              description: List all learners with optional email filter
-              call: "thought-industries.list-users"
-              with:
-                email: "rest.email"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: POST
-              name: create-user
-              description: Create a new learner account
-              call: "thought-industries.create-user"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/users/{id}
-          name: user
-          description: Single user operations
-          operations:
-            - method: GET
-              name: get-user
-              description: Get learner details by ID
-              call: "thought-industries.get-user"
-              with:
-                id: "rest.id"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: PUT
-              name: update-user
-              description: Update learner profile or deactivate account
-              call: "thought-industries.update-user"
-              with:
-                id: "rest.id"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/users/{id}/enrollments
-          name: user-enrollments
-          description: User enrollment history
-          operations:
-            - method: GET
-              name: get-user-enrollments
-              description: Get all course enrollments for a learner
-              call: "thought-industries.get-user-enrollments"
-              with:
-                id: "rest.id"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/courses
-          name: courses
-          description: Course catalog
-          operations:
-            - method: GET
-              name: list-courses
-              description: List all courses in the catalog
-              call: "thought-industries.list-courses"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/courses/{courseId}
-          name: course
-          description: Single course details
-          operations:
-            - method: GET
-              name: get-course
-              description: Get course details
-              call: "thought-industries.get-course"
-              with:
-                courseId: "rest.courseId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/courses/{courseId}/enrollments
-          name: course-enrollments
-          description: Course enrollment management
-          operations:
-            - method: POST
-              name: enroll-user
-              description: Enroll a learner in a course
-              call: "thought-industries.enroll-user"
-              with:
-                courseId: "rest.courseId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/courses/{courseId}/enrollments/bulk-remove
-          name: bulk-remove-enrollments
-          description: Bulk remove course access
-          operations:
-            - method: POST
-              name: bulk-remove-enrollments
-              description: Remove multiple learners from a course
-              call: "thought-industries.bulk-remove-enrollments"
-              with:
-                courseId: "rest.courseId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/groups
-          name: groups
-          description: Learner groups
-          operations:
-            - method: GET
-              name: list-groups
-              description: List all learner groups
-              call: "thought-industries.list-groups"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/groups/{groupId}/users
-          name: group-members
-          description: Group membership
-          operations:
-            - method: POST
-              name: add-user-to-group
-              description: Add learner to a group
-              call: "thought-industries.add-user-to-group"
-              with:
-                groupId: "rest.groupId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/reports/learning-path-actions
-          name: learning-path-report
-          description: Learning path actions report
-          operations:
-            - method: GET
-              name: get-learning-path-actions-report
-              description: Get learning path enrollment actions report
-              call: "thought-industries.get-learning-path-actions-report"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-    - type: mcp
-      port: 9090
-      namespace: learning-management-mcp
-      transport: http
-      description: "MCP server for AI-assisted learning management and L&D workflows."
-      tools:
-        - name: list-users
-          description: List all learners in the platform with optional email filter
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "thought-industries.list-users"
-          with:
-            email: "tools.email"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: create-user
-          description: Create a new learner account in the platform
-          hints:
-            readOnly: false
-            destructive: false
-          call: "thought-industries.create-user"
-          with:
-            email: "tools.email"
-            first_name: "tools.first_name"
-            last_name: "tools.last_name"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-user
-          description: Get learner details and profile by user ID
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "thought-industries.get-user"
-          with:
-            id: "tools.id"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: update-user
-          description: Update learner profile or activate/deactivate account
-          hints:
-            readOnly: false
-            destructive: false
-            idempotent: true
-          call: "thought-industries.update-user"
-          with:
-            id: "tools.id"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-user-enrollments
-          description: Get all course enrollments and progress for a learner
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "thought-industries.get-user-enrollments"
-          with:
-            id: "tools.id"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-courses
-          description: List all available courses in the catalog with status filter
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "thought-industries.list-courses"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-course
-          description: Get detailed information about a specific course
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "thought-industries.get-course"
-          with:
-            courseId: "tools.courseId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: enroll-user
-          description: Enroll a learner in a course
-          hints:
-            readOnly: false
-            destructive: false
-          call: "thought-industries.enroll-user"
-          with:
-            courseId: "tools.courseId"
-            user_id: "tools.user_id"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: bulk-remove-enrollments
-          description: Remove multiple learners from a course or learning path
-          hints:
-            readOnly: false
-            destructive: true
-            idempotent: true
-          call: "thought-industries.bulk-remove-enrollments"
-          with:
-            courseId: "tools.courseId"
-            user_ids: "tools.user_ids"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-groups
-          description: List all learner groups in the platform
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "thought-industries.list-groups"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: add-user-to-group
-          description: Add a learner to a specific group
-          hints:
-            readOnly: false
-            destructive: false
-          call: "thought-industries.add-user-to-group"
-          with:
-            groupId: "tools.groupId"
-            user_id: "tools.user_id"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-learning-path-actions-report
-          description: Get learning path enrollment actions and completion report
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "thought-industries.get-learning-path-actions-report"
-          outputParameters:
-            - type: object
-              mapping: "$."
+  - type: rest
+    port: 8080
+    namespace: learning-management-api
+    description: Unified REST API for learning management workflows.
+    resources:
+    - path: /v1/users
+      name: users
+      description: Learner user management
+      operations:
+      - method: GET
+        name: list-users
+        description: List all learners with optional email filter
+        call: thought-industries.list-users
+        with:
+          email: rest.email
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create-user
+        description: Create a new learner account
+        call: thought-industries.create-user
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/{id}
+      name: user
+      description: Single user operations
+      operations:
+      - method: GET
+        name: get-user
+        description: Get learner details by ID
+        call: thought-industries.get-user
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: update-user
+        description: Update learner profile or deactivate account
+        call: thought-industries.update-user
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/{id}/enrollments
+      name: user-enrollments
+      description: User enrollment history
+      operations:
+      - method: GET
+        name: get-user-enrollments
+        description: Get all course enrollments for a learner
+        call: thought-industries.get-user-enrollments
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/courses
+      name: courses
+      description: Course catalog
+      operations:
+      - method: GET
+        name: list-courses
+        description: List all courses in the catalog
+        call: thought-industries.list-courses
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/courses/{courseId}
+      name: course
+      description: Single course details
+      operations:
+      - method: GET
+        name: get-course
+        description: Get course details
+        call: thought-industries.get-course
+        with:
+          courseId: rest.courseId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/courses/{courseId}/enrollments
+      name: course-enrollments
+      description: Course enrollment management
+      operations:
+      - method: POST
+        name: enroll-user
+        description: Enroll a learner in a course
+        call: thought-industries.enroll-user
+        with:
+          courseId: rest.courseId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/courses/{courseId}/enrollments/bulk-remove
+      name: bulk-remove-enrollments
+      description: Bulk remove course access
+      operations:
+      - method: POST
+        name: bulk-remove-enrollments
+        description: Remove multiple learners from a course
+        call: thought-industries.bulk-remove-enrollments
+        with:
+          courseId: rest.courseId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/groups
+      name: groups
+      description: Learner groups
+      operations:
+      - method: GET
+        name: list-groups
+        description: List all learner groups
+        call: thought-industries.list-groups
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/groups/{groupId}/users
+      name: group-members
+      description: Group membership
+      operations:
+      - method: POST
+        name: add-user-to-group
+        description: Add learner to a group
+        call: thought-industries.add-user-to-group
+        with:
+          groupId: rest.groupId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/reports/learning-path-actions
+      name: learning-path-report
+      description: Learning path actions report
+      operations:
+      - method: GET
+        name: get-learning-path-actions-report
+        description: Get learning path enrollment actions report
+        call: thought-industries.get-learning-path-actions-report
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: learning-management-mcp
+    transport: http
+    description: MCP server for AI-assisted learning management and L&D workflows.
+    tools:
+    - name: list-users
+      description: List all learners in the platform with optional email filter
+      hints:
+        readOnly: true
+        openWorld: true
+      call: thought-industries.list-users
+      with:
+        email: tools.email
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-user
+      description: Create a new learner account in the platform
+      hints:
+        readOnly: false
+        destructive: false
+      call: thought-industries.create-user
+      with:
+        email: tools.email
+        first_name: tools.first_name
+        last_name: tools.last_name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-user
+      description: Get learner details and profile by user ID
+      hints:
+        readOnly: true
+        openWorld: true
+      call: thought-industries.get-user
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-user
+      description: Update learner profile or activate/deactivate account
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: thought-industries.update-user
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-user-enrollments
+      description: Get all course enrollments and progress for a learner
+      hints:
+        readOnly: true
+        openWorld: true
+      call: thought-industries.get-user-enrollments
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-courses
+      description: List all available courses in the catalog with status filter
+      hints:
+        readOnly: true
+        openWorld: true
+      call: thought-industries.list-courses
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-course
+      description: Get detailed information about a specific course
+      hints:
+        readOnly: true
+        openWorld: true
+      call: thought-industries.get-course
+      with:
+        courseId: tools.courseId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: enroll-user
+      description: Enroll a learner in a course
+      hints:
+        readOnly: false
+        destructive: false
+      call: thought-industries.enroll-user
+      with:
+        courseId: tools.courseId
+        user_id: tools.user_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: bulk-remove-enrollments
+      description: Remove multiple learners from a course or learning path
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: thought-industries.bulk-remove-enrollments
+      with:
+        courseId: tools.courseId
+        user_ids: tools.user_ids
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-groups
+      description: List all learner groups in the platform
+      hints:
+        readOnly: true
+        openWorld: true
+      call: thought-industries.list-groups
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-user-to-group
+      description: Add a learner to a specific group
+      hints:
+        readOnly: false
+        destructive: false
+      call: thought-industries.add-user-to-group
+      with:
+        groupId: tools.groupId
+        user_id: tools.user_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-learning-path-actions-report
+      description: Get learning path enrollment actions and completion report
+      hints:
+        readOnly: true
+        openWorld: true
+      call: thought-industries.get-learning-path-actions-report
+      outputParameters:
+      - type: object
+        mapping: $.
