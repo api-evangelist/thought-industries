@@ -90,6 +90,13 @@ common:
     url: https://developer.thoughtindustries.com/
   - type: Support
     url: https://support.thoughtindustries.com/
+  - type: Integrations
+    url: https://www.thoughtindustries.com/partners/
+integrations:
+  - name: figure-3
+  - name: Ti logo w/ TM white text
+  - name: Twitter
+  - name: LinkedIn
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
