@@ -1,87 +1,94 @@
-# Thought Industries
+# Thought Industries (thought-industries)
 
-Thought Industries is a B2B learning platform (LMS/LXP) providing REST and GraphQL APIs for programmatic access to courses, users, enrollments, content management, and reporting. Their developer portal enables integration of learning experiences into enterprise workflows.
+Thought Industries is a B2B learning platform (LMS/LXP) providing REST and GraphQL APIs for programmatic access to courses, users, enrollments, content management, and reporting. Their developer portal enables integration of learning experiences into enterprise workflows with webhook support and comprehensive API coverage for user lifecycle, content, and analytics.
 
-**Developer Portal:** [https://developer.thoughtindustries.com/](https://developer.thoughtindustries.com/)
+**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/thought-industries/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/thought-industries/refs/heads/main/apis.yml)
+
+## Scope
+
+- **Type:** Index
+- **Position:** Consumer
+- **Access:** 3rd-Party
+
+## Tags
+
+- Education
+- Learning
+- LMS
+- LXP
+- E-Learning
+- Training
+
+## Timestamps
+
+- **Created:** 2025-03-01
+- **Modified:** 2026-05-19
 
 ## APIs
 
-| Name | Description | Documentation |
-|------|-------------|---------------|
-| [Thought Industries REST API](https://developer.thoughtindustries.com/) | REST API v1 for users, courses, enrollments, groups, content, categories, and reporting. | [Docs](https://api.thoughtindustries.com/) |
-| [Thought Industries GraphQL API](https://developer.thoughtindustries.com/graphql/) | GraphQL API for flexible querying of platform data with schema introspection. | [Docs](https://developer.thoughtindustries.com/graphql/) |
+### Thought Industries REST API
 
-## Common Resources
+The Thought Industries REST API v1 provides programmatic access to users, enrollments, courses, groups, content, categories, bundles, reports, and learning paths. Authentication uses API key via X-API-Key header or apiKey query parameter. Base URL is tenant-scoped at https://{subdomain}.thoughtindustries.com/incoming/api/v1/.
 
-- **Website:** [https://www.thoughtindustries.com/](https://www.thoughtindustries.com/)
-- **Developer Portal:** [https://developer.thoughtindustries.com/](https://developer.thoughtindustries.com/)
-- **Getting Started:** [https://developer.thoughtindustries.com/api-tutorials/](https://developer.thoughtindustries.com/api-tutorials/)
-- **GitHub Organization:** [https://github.com/thoughtindustries](https://github.com/thoughtindustries)
+- **Human URL:** [https://developer.thoughtindustries.com/](https://developer.thoughtindustries.com/)
+- **Base URL:** `https://{subdomain}.thoughtindustries.com/incoming/api/v1`
 
-## OpenAPI Specifications
+#### Tags
 
-| File | Description |
-|------|-------------|
-| [thought-industries-openapi.yml](openapi/thought-industries-openapi.yml) | REST API v1 covering users, courses, enrollments, groups, content, and reports |
+- Education
+- Learning
+- LMS
+- REST
+- Users
+- Courses
+- Enrollments
 
-## JSON Schemas
+#### Properties
 
-| File | Description |
-|------|-------------|
-| [thought-industries-user-schema.json](json-schema/thought-industries-user-schema.json) | Learner user account schema |
-| [thought-industries-enrollment-schema.json](json-schema/thought-industries-enrollment-schema.json) | Course enrollment schema |
+- [Documentation](https://api.thoughtindustries.com/)
+- [Getting Started](https://developer.thoughtindustries.com/api-tutorials/)
+- [Authentication](https://developer.thoughtindustries.com/api-tutorials/)
+- [OpenAPI](openapi/thought-industries-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/thought-industries.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/thought-industries.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [JSON Schema](json-schema/thought-industries-user-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/thought-industries-enrollment-schema.json) — [JSON Schema](https://json-schema.org/specification)
 
-## JSON Structures
+### Thought Industries GraphQL API
 
-| File | Description |
-|------|-------------|
-| [thought-industries-user-structure.json](json-structure/thought-industries-user-structure.json) | User, enrollment, course, and response structure documentation |
+The Thought Industries GraphQL API provides flexible querying of platform data including courses, users, content, and enrollments. Available at /incoming/api/graphql with schema introspection supported. Complements the REST API for complex queries and mutations.
 
-## JSON-LD
+- **Human URL:** [https://developer.thoughtindustries.com/graphql/](https://developer.thoughtindustries.com/graphql/)
+- **Base URL:** `https://{subdomain}.thoughtindustries.com/incoming/api`
 
-| File | Description |
-|------|-------------|
-| [thought-industries-context.jsonld](json-ld/thought-industries-context.jsonld) | JSON-LD context mapping LMS vocabulary to schema.org |
+#### Tags
 
-## Examples
+- GraphQL
+- Learning
+- Education
+- LMS
 
-| File | Description |
-|------|-------------|
-| [thought-industries-list-users-example.json](examples/thought-industries-list-users-example.json) | List users request/response |
-| [thought-industries-enroll-user-example.json](examples/thought-industries-enroll-user-example.json) | Enroll user request/response |
+#### Properties
 
-## Spectral Rules
+- [Documentation](https://developer.thoughtindustries.com/graphql/)
+- [Getting Started](https://developer.thoughtindustries.com/api-tutorials/)
+- [Postman Collection](collections/thought-industries.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/thought-industries.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
-| File | Description |
-|------|-------------|
-| [thought-industries-rules.yml](rules/thought-industries-rules.yml) | Spectral ruleset enforcing Thought Industries API conventions |
+## Common Properties
 
-## Naftiko Capabilities
-
-### Shared Definitions
-
-| File | Description |
-|------|-------------|
-| [capabilities/shared/rest-api.yaml](capabilities/shared/rest-api.yaml) | Per-API consumed definition for Thought Industries REST API |
-
-### Workflow Capabilities
-
-| File | Description | Tools |
-|------|-------------|-------|
-| [capabilities/learning-management.yaml](capabilities/learning-management.yaml) | Learning management for users, courses, enrollments, groups, and reporting | 12 tools |
-
-## Vocabulary
-
-| File | Description |
-|------|-------------|
-| [thought-industries-vocabulary.yml](vocabulary/thought-industries-vocabulary.yml) | Domain vocabulary for LMS and learning management concepts |
+- [LinkedIn](https://www.linkedin.com/company/thought-industries)
+- [Website](https://www.thoughtindustries.com/)
+- [Developer Portal](https://developer.thoughtindustries.com/)
+- [Documentation](https://api.thoughtindustries.com/)
+- [Getting Started](https://developer.thoughtindustries.com/api-tutorials/)
+- [Authentication](https://academy.thoughtindustries.com/courses/api-keys)
+- [GitHub Organization](https://github.com/thoughtindustries)
+- [Webhooks](https://developer.thoughtindustries.com/)
+- [Support](https://support.thoughtindustries.com/)
+- [Integrations](https://www.thoughtindustries.com/partners/)
 
 ## Maintainers
 
 **FN:** Kin Lane
-
 **Email:** kin@apievangelist.com
-
----
-
-*Profiled by [API Evangelist](https://apievangelist.com) on 2026-05-03*
