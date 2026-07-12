@@ -71,6 +71,14 @@ apis:
   - url: graphql/thought-industries-graphql.md
     type: GraphQL
 common:
+- type: TrustCenter
+  url: security/thought-industries-trust-center.yml
+- type: DomainSecurity
+  url: security/thought-industries-domain-security.yml
+- type: Authentication
+  url: authentication/thought-industries-authentication.yml
+- url: https://www.thoughtindustries.com/blog/feed/
+  type: Blog
 - type: LinkedIn
   url: https://www.linkedin.com/company/thought-industries
 - type: Website

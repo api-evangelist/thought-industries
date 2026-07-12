@@ -1,0 +1,24 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/thought-industries-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+  - query
+schemes:
+- name: ApiKeyHeader
+  type: apiKey
+  in: header
+  parameter: X-API-Key
+  description: API key passed as X-API-Key request header.
+  sources:
+  - openapi/thought-industries-openapi.yml
+- name: ApiKeyQuery
+  type: apiKey
+  in: query
+  parameter: apiKey
+  description: API key passed as apiKey query parameter.
+  sources:
+  - openapi/thought-industries-openapi.yml
