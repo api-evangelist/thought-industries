@@ -71,6 +71,8 @@ apis:
   - url: graphql/thought-industries-graphql.md
     type: GraphQL
 common:
+- type: AgenticAccess
+  url: agentic-access/thought-industries-agentic-access.yml
 - type: TrustCenter
   url: security/thought-industries-trust-center.yml
 - type: DomainSecurity
