@@ -1,0 +1,145 @@
+openapi: 3.1.0
+info:
+  title: Thought Industries REST Content Courses API
+  description: The Thought Industries REST API v1 provides programmatic access to the Thought Industries B2B learning platform. Enables management of users, courses, enrollments, groups, content, categories, bundles, and reporting. Authentication uses API key via X-API-Key header or apiKey query parameter. Base URL is tenant-scoped per subdomain.
+  version: '1.0'
+  contact:
+    url: https://developer.thoughtindustries.com/
+  termsOfService: https://www.thoughtindustries.com/
+  license:
+    name: Commercial
+    url: https://www.thoughtindustries.com/
+servers:
+- url: https://{subdomain}.thoughtindustries.com/incoming/api/v1
+  description: Thought Industries REST API v1 (tenant-scoped)
+  variables:
+    subdomain:
+      default: yourtenant
+      description: Your Thought Industries tenant subdomain
+security:
+- ApiKeyHeader: []
+- ApiKeyQuery: []
+tags:
+- name: Courses
+  description: Course management and content
+paths:
+  /courses:
+    get:
+      operationId: listCourses
+      summary: List Courses
+      description: Returns a paginated list of all courses in the tenant.
+      tags:
+      - Courses
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+          default: 1
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+          default: 25
+          maximum: 100
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - published
+          - draft
+          - archived
+        description: Filter by course status.
+      responses:
+        '200':
+          description: List of courses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CourseListResponse'
+  /courses/{courseId}:
+    get:
+      operationId: getCourse
+      summary: Get Course
+      description: Returns details for a specific course.
+      tags:
+      - Courses
+      parameters:
+      - name: courseId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Course ID.
+      responses:
+        '200':
+          description: Course details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CourseResponse'
+components:
+  schemas:
+    CourseResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Course'
+    CourseListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Course'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    Course:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum:
+          - published
+          - draft
+          - archived
+        category_id:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    PaginationMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total_pages:
+          type: integer
+  securitySchemes:
+    ApiKeyHeader:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: API key passed as X-API-Key request header.
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: apiKey
+      description: API key passed as apiKey query parameter.
+externalDocs:
+  description: Thought Industries Developer Portal
+  url: https://developer.thoughtindustries.com/

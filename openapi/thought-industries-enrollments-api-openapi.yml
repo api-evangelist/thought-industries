@@ -1,0 +1,207 @@
+openapi: 3.1.0
+info:
+  title: Thought Industries REST Content Enrollments API
+  description: The Thought Industries REST API v1 provides programmatic access to the Thought Industries B2B learning platform. Enables management of users, courses, enrollments, groups, content, categories, bundles, and reporting. Authentication uses API key via X-API-Key header or apiKey query parameter. Base URL is tenant-scoped per subdomain.
+  version: '1.0'
+  contact:
+    url: https://developer.thoughtindustries.com/
+  termsOfService: https://www.thoughtindustries.com/
+  license:
+    name: Commercial
+    url: https://www.thoughtindustries.com/
+servers:
+- url: https://{subdomain}.thoughtindustries.com/incoming/api/v1
+  description: Thought Industries REST API v1 (tenant-scoped)
+  variables:
+    subdomain:
+      default: yourtenant
+      description: Your Thought Industries tenant subdomain
+security:
+- ApiKeyHeader: []
+- ApiKeyQuery: []
+tags:
+- name: Enrollments
+  description: Course enrollment management
+paths:
+  /users/{id}/enrollments:
+    get:
+      operationId: getUserEnrollments
+      summary: Get User Enrollments
+      description: Returns course enrollment data for a specific user.
+      tags:
+      - Enrollments
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: User ID.
+      - name: page
+        in: query
+        schema:
+          type: integer
+          default: 1
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+          default: 25
+      responses:
+        '200':
+          description: User enrollments
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnrollmentListResponse'
+  /courses/{courseId}/enrollments:
+    post:
+      operationId: enrollUser
+      summary: Enroll User in Course
+      description: Enrolls a user in a course. The course must be published and the user must be active before calling this endpoint.
+      tags:
+      - Enrollments
+      parameters:
+      - name: courseId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Course ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnrollUserRequest'
+      responses:
+        '201':
+          description: Enrollment created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnrollmentResponse'
+        '422':
+          description: Course not published or user not active
+  /courses/{courseId}/enrollments/bulk-remove:
+    post:
+      operationId: bulkRemoveEnrollments
+      summary: Bulk Remove User Access
+      description: Removes access for multiple learners from a course or learning path without affecting their existing access elsewhere.
+      tags:
+      - Enrollments
+      parameters:
+      - name: courseId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Course ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkRemoveRequest'
+      responses:
+        '200':
+          description: Bulk removal completed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkOperationResponse'
+components:
+  schemas:
+    EnrollmentResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Enrollment'
+    EnrollmentListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Enrollment'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    EnrollUserRequest:
+      type: object
+      required:
+      - user_id
+      properties:
+        user_id:
+          type: string
+          description: The ID of the user to enroll.
+    BulkOperationResponse:
+      type: object
+      properties:
+        removed:
+          type: integer
+        failed:
+          type: integer
+        errors:
+          type: array
+          items:
+            type: string
+    BulkRemoveRequest:
+      type: object
+      required:
+      - user_ids
+      properties:
+        user_ids:
+          type: array
+          items:
+            type: string
+          description: List of user IDs to remove access from.
+    PaginationMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total_pages:
+          type: integer
+    Enrollment:
+      type: object
+      properties:
+        id:
+          type: string
+        user_id:
+          type: string
+        course_id:
+          type: string
+        status:
+          type: string
+          enum:
+          - enrolled
+          - in_progress
+          - completed
+        progress:
+          type: number
+          format: float
+          description: Completion percentage (0-100)
+        enrolled_at:
+          type: string
+          format: date-time
+        completed_at:
+          type: string
+          format: date-time
+  securitySchemes:
+    ApiKeyHeader:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: API key passed as X-API-Key request header.
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: apiKey
+      description: API key passed as apiKey query parameter.
+externalDocs:
+  description: Thought Industries Developer Portal
+  url: https://developer.thoughtindustries.com/

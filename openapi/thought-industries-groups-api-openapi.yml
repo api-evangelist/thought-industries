@@ -1,0 +1,145 @@
+openapi: 3.1.0
+info:
+  title: Thought Industries REST Content Groups API
+  description: The Thought Industries REST API v1 provides programmatic access to the Thought Industries B2B learning platform. Enables management of users, courses, enrollments, groups, content, categories, bundles, and reporting. Authentication uses API key via X-API-Key header or apiKey query parameter. Base URL is tenant-scoped per subdomain.
+  version: '1.0'
+  contact:
+    url: https://developer.thoughtindustries.com/
+  termsOfService: https://www.thoughtindustries.com/
+  license:
+    name: Commercial
+    url: https://www.thoughtindustries.com/
+servers:
+- url: https://{subdomain}.thoughtindustries.com/incoming/api/v1
+  description: Thought Industries REST API v1 (tenant-scoped)
+  variables:
+    subdomain:
+      default: yourtenant
+      description: Your Thought Industries tenant subdomain
+security:
+- ApiKeyHeader: []
+- ApiKeyQuery: []
+tags:
+- name: Groups
+  description: User group management
+paths:
+  /groups:
+    get:
+      operationId: listGroups
+      summary: List Groups
+      description: Returns a paginated list of all user groups.
+      tags:
+      - Groups
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+          default: 1
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+          default: 25
+      responses:
+        '200':
+          description: List of groups
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupListResponse'
+  /groups/{groupId}/users:
+    post:
+      operationId: addUserToGroup
+      summary: Add User to Group
+      description: Assigns a user to an existing group.
+      tags:
+      - Groups
+      parameters:
+      - name: groupId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Group ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddUserToGroupRequest'
+      responses:
+        '201':
+          description: User added to group
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupMembershipResponse'
+components:
+  schemas:
+    GroupMembershipResponse:
+      type: object
+      properties:
+        user_id:
+          type: string
+        group_id:
+          type: string
+        added_at:
+          type: string
+          format: date-time
+    AddUserToGroupRequest:
+      type: object
+      required:
+      - user_id
+      properties:
+        user_id:
+          type: string
+          description: The ID of the user to add to the group.
+    GroupListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    Group:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        member_count:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+    PaginationMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total_pages:
+          type: integer
+  securitySchemes:
+    ApiKeyHeader:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: API key passed as X-API-Key request header.
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: apiKey
+      description: API key passed as apiKey query parameter.
+externalDocs:
+  description: Thought Industries Developer Portal
+  url: https://developer.thoughtindustries.com/

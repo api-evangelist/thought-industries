@@ -1,0 +1,243 @@
+openapi: 3.1.0
+info:
+  title: Thought Industries REST Content Users API
+  description: The Thought Industries REST API v1 provides programmatic access to the Thought Industries B2B learning platform. Enables management of users, courses, enrollments, groups, content, categories, bundles, and reporting. Authentication uses API key via X-API-Key header or apiKey query parameter. Base URL is tenant-scoped per subdomain.
+  version: '1.0'
+  contact:
+    url: https://developer.thoughtindustries.com/
+  termsOfService: https://www.thoughtindustries.com/
+  license:
+    name: Commercial
+    url: https://www.thoughtindustries.com/
+servers:
+- url: https://{subdomain}.thoughtindustries.com/incoming/api/v1
+  description: Thought Industries REST API v1 (tenant-scoped)
+  variables:
+    subdomain:
+      default: yourtenant
+      description: Your Thought Industries tenant subdomain
+security:
+- ApiKeyHeader: []
+- ApiKeyQuery: []
+tags:
+- name: Users
+  description: User lifecycle management
+paths:
+  /users:
+    get:
+      operationId: listUsers
+      summary: List Users
+      description: Returns a paginated list of all users in the tenant. Default page size is 25. Use page and per_page parameters for pagination.
+      tags:
+      - Users
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+          default: 1
+        description: Page number for pagination.
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+          default: 25
+          maximum: 100
+        description: Number of records per page (max 100).
+      - name: email
+        in: query
+        schema:
+          type: string
+        description: Filter users by email address.
+      responses:
+        '200':
+          description: List of users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserListResponse'
+        '401':
+          description: Unauthorized - invalid or missing API key
+    post:
+      operationId: createUser
+      summary: Create User
+      description: Creates a new user in the tenant. Email must be unique per tenant.
+      tags:
+      - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserRequest'
+      responses:
+        '201':
+          description: User created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '422':
+          description: Validation error - email already exists
+  /users/{id}:
+    get:
+      operationId: getUser
+      summary: Get User
+      description: Returns details for a single user by ID.
+      tags:
+      - Users
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: User ID.
+      responses:
+        '200':
+          description: User details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '404':
+          description: User not found
+    put:
+      operationId: updateUser
+      summary: Update User
+      description: Updates a user record. Full object replacement semantics apply. To deactivate a user, set active to false.
+      tags:
+      - Users
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: User ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserRequest'
+      responses:
+        '200':
+          description: User updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+    delete:
+      operationId: deleteUser
+      summary: Delete User
+      description: Permanently deletes a user. Deactivation is preferred over deletion.
+      tags:
+      - Users
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: User ID.
+      responses:
+        '204':
+          description: User deleted
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+          format: email
+        first_name:
+          type: string
+        last_name:
+          type: string
+        active:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        custom_fields:
+          type: object
+          additionalProperties: true
+    CreateUserRequest:
+      type: object
+      required:
+      - email
+      properties:
+        email:
+          type: string
+          format: email
+        first_name:
+          type: string
+        last_name:
+          type: string
+        active:
+          type: boolean
+          default: true
+        custom_fields:
+          type: object
+          additionalProperties: true
+    UpdateUserRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        first_name:
+          type: string
+        last_name:
+          type: string
+        active:
+          type: boolean
+        custom_fields:
+          type: object
+          additionalProperties: true
+    PaginationMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total_pages:
+          type: integer
+    UserListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    UserResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/User'
+  securitySchemes:
+    ApiKeyHeader:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: API key passed as X-API-Key request header.
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: apiKey
+      description: API key passed as apiKey query parameter.
+externalDocs:
+  description: Thought Industries Developer Portal
+  url: https://developer.thoughtindustries.com/

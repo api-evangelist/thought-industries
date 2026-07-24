@@ -1,0 +1,94 @@
+openapi: 3.1.0
+info:
+  title: Thought Industries REST Content Reports API
+  description: The Thought Industries REST API v1 provides programmatic access to the Thought Industries B2B learning platform. Enables management of users, courses, enrollments, groups, content, categories, bundles, and reporting. Authentication uses API key via X-API-Key header or apiKey query parameter. Base URL is tenant-scoped per subdomain.
+  version: '1.0'
+  contact:
+    url: https://developer.thoughtindustries.com/
+  termsOfService: https://www.thoughtindustries.com/
+  license:
+    name: Commercial
+    url: https://www.thoughtindustries.com/
+servers:
+- url: https://{subdomain}.thoughtindustries.com/incoming/api/v1
+  description: Thought Industries REST API v1 (tenant-scoped)
+  variables:
+    subdomain:
+      default: yourtenant
+      description: Your Thought Industries tenant subdomain
+security:
+- ApiKeyHeader: []
+- ApiKeyQuery: []
+tags:
+- name: Reports
+  description: Analytics and reporting
+paths:
+  /reports/learning-path-actions:
+    get:
+      operationId: getLearningPathActionsReport
+      summary: Get Learning Path Actions Report
+      description: Returns learning path enrollment actions including Panorama enrollments and main site enrollments.
+      tags:
+      - Reports
+      parameters:
+      - name: start_date
+        in: query
+        schema:
+          type: string
+          format: date
+        description: Report start date.
+      - name: end_date
+        in: query
+        schema:
+          type: string
+          format: date
+        description: Report end date.
+      - name: page
+        in: query
+        schema:
+          type: integer
+          default: 1
+      responses:
+        '200':
+          description: Learning path actions report
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportResponse'
+components:
+  schemas:
+    PaginationMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total_pages:
+          type: integer
+    ReportResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+  securitySchemes:
+    ApiKeyHeader:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: API key passed as X-API-Key request header.
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: apiKey
+      description: API key passed as apiKey query parameter.
+externalDocs:
+  description: Thought Industries Developer Portal
+  url: https://developer.thoughtindustries.com/
