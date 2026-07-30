@@ -6,9 +6,22 @@ description: >-
   experiences into enterprise workflows with webhook support and comprehensive API coverage for user lifecycle, content,
   and analytics.
 type: Index
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/thought-industries.png
 tags:
 - Education
 - Learning
@@ -21,41 +34,12 @@ modified: '2026-05-19'
 url: https://raw.githubusercontent.com/api-evangelist/thought-industries/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
-- aid: thought-industries:rest-api
-  name: Thought Industries REST API
-  description: >-
-    The Thought Industries REST API v1 provides programmatic access to users, enrollments, courses, groups, content,
-    categories, bundles, reports, and learning paths. Authentication uses API key via X-API-Key header or apiKey query
-    parameter. Base URL is tenant-scoped at https://{subdomain}.thoughtindustries.com/incoming/api/v1/.
-  humanURL: https://developer.thoughtindustries.com/
-  baseURL: https://{subdomain}.thoughtindustries.com/incoming/api/v1
-  tags:
-  - Education
-  - Learning
-  - LMS
-  - REST
-  - Users
-  - Courses
-  - Enrollments
-  properties:
-  - type: Documentation
-    url: https://api.thoughtindustries.com/
-  - type: GettingStarted
-    url: https://developer.thoughtindustries.com/api-tutorials/
-  - type: Authentication
-    url: https://developer.thoughtindustries.com/api-tutorials/
-  - type: OpenAPI
-    url: openapi/thought-industries-openapi.yml
-  - type: JSONSchema
-    url: json-schema/thought-industries-user-schema.json
-  - type: JSONSchema
-    url: json-schema/thought-industries-enrollment-schema.json
 - aid: thought-industries:graphql-api
   name: Thought Industries GraphQL API
   description: >-
-    The Thought Industries GraphQL API provides flexible querying of platform data including courses, users, content,
-    and enrollments. Available at /incoming/api/graphql with schema introspection supported. Complements the REST API
-    for complex queries and mutations.
+    The Thought Industries GraphQL API provides flexible querying of platform data including courses,
+    users, content, and enrollments. Available at /incoming/api/graphql with schema introspection supported.
+    Complements the REST API for complex queries and mutations.
   humanURL: https://developer.thoughtindustries.com/graphql/
   baseURL: https://{subdomain}.thoughtindustries.com/incoming/api
   tags:
@@ -70,7 +54,129 @@ apis:
     url: https://developer.thoughtindustries.com/api-tutorials/
   - url: graphql/thought-industries-graphql.md
     type: GraphQL
+- aid: thought-industries:thought-industries-content-api
+  name: Thought Industries Content API
+  description: Learning content and categories
+  humanURL: https://developer.thoughtindustries.com/
+  baseURL: https://{subdomain}.thoughtindustries.com/incoming/api/v1
+  tags:
+  - Content
+  properties:
+  - type: OpenAPI
+    url: openapi/thought-industries-content-api-openapi.yml
+  - type: Documentation
+    url: https://api.thoughtindustries.com/
+  - type: GettingStarted
+    url: https://developer.thoughtindustries.com/api-tutorials/
+  - type: Authentication
+    url: https://developer.thoughtindustries.com/api-tutorials/
+  - type: JSONSchema
+    url: json-schema/thought-industries-user-schema.json
+  - type: JSONSchema
+    url: json-schema/thought-industries-enrollment-schema.json
+- aid: thought-industries:thought-industries-courses-api
+  name: Thought Industries Courses API
+  description: Course management and content
+  humanURL: https://developer.thoughtindustries.com/
+  baseURL: https://{subdomain}.thoughtindustries.com/incoming/api/v1
+  tags:
+  - Courses
+  properties:
+  - type: OpenAPI
+    url: openapi/thought-industries-courses-api-openapi.yml
+  - type: Documentation
+    url: https://api.thoughtindustries.com/
+  - type: GettingStarted
+    url: https://developer.thoughtindustries.com/api-tutorials/
+  - type: Authentication
+    url: https://developer.thoughtindustries.com/api-tutorials/
+  - type: JSONSchema
+    url: json-schema/thought-industries-user-schema.json
+  - type: JSONSchema
+    url: json-schema/thought-industries-enrollment-schema.json
+- aid: thought-industries:thought-industries-enrollments-api
+  name: Thought Industries Enrollments API
+  description: Course enrollment management
+  humanURL: https://developer.thoughtindustries.com/
+  baseURL: https://{subdomain}.thoughtindustries.com/incoming/api/v1
+  tags:
+  - Enrollments
+  properties:
+  - type: OpenAPI
+    url: openapi/thought-industries-enrollments-api-openapi.yml
+  - type: Documentation
+    url: https://api.thoughtindustries.com/
+  - type: GettingStarted
+    url: https://developer.thoughtindustries.com/api-tutorials/
+  - type: Authentication
+    url: https://developer.thoughtindustries.com/api-tutorials/
+  - type: JSONSchema
+    url: json-schema/thought-industries-user-schema.json
+  - type: JSONSchema
+    url: json-schema/thought-industries-enrollment-schema.json
+- aid: thought-industries:thought-industries-groups-api
+  name: Thought Industries Groups API
+  description: User group management
+  humanURL: https://developer.thoughtindustries.com/
+  baseURL: https://{subdomain}.thoughtindustries.com/incoming/api/v1
+  tags:
+  - Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/thought-industries-groups-api-openapi.yml
+  - type: Documentation
+    url: https://api.thoughtindustries.com/
+  - type: GettingStarted
+    url: https://developer.thoughtindustries.com/api-tutorials/
+  - type: Authentication
+    url: https://developer.thoughtindustries.com/api-tutorials/
+  - type: JSONSchema
+    url: json-schema/thought-industries-user-schema.json
+  - type: JSONSchema
+    url: json-schema/thought-industries-enrollment-schema.json
+- aid: thought-industries:thought-industries-reports-api
+  name: Thought Industries Reports API
+  description: Analytics and reporting
+  humanURL: https://developer.thoughtindustries.com/
+  baseURL: https://{subdomain}.thoughtindustries.com/incoming/api/v1
+  tags:
+  - Reports
+  properties:
+  - type: OpenAPI
+    url: openapi/thought-industries-reports-api-openapi.yml
+  - type: Documentation
+    url: https://api.thoughtindustries.com/
+  - type: GettingStarted
+    url: https://developer.thoughtindustries.com/api-tutorials/
+  - type: Authentication
+    url: https://developer.thoughtindustries.com/api-tutorials/
+  - type: JSONSchema
+    url: json-schema/thought-industries-user-schema.json
+  - type: JSONSchema
+    url: json-schema/thought-industries-enrollment-schema.json
+- aid: thought-industries:thought-industries-users-api
+  name: Thought Industries Users API
+  description: User lifecycle management
+  humanURL: https://developer.thoughtindustries.com/
+  baseURL: https://{subdomain}.thoughtindustries.com/incoming/api/v1
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/thought-industries-users-api-openapi.yml
+  - type: Documentation
+    url: https://api.thoughtindustries.com/
+  - type: GettingStarted
+    url: https://developer.thoughtindustries.com/api-tutorials/
+  - type: Authentication
+    url: https://developer.thoughtindustries.com/api-tutorials/
+  - type: JSONSchema
+    url: json-schema/thought-industries-user-schema.json
+  - type: JSONSchema
+    url: json-schema/thought-industries-enrollment-schema.json
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/thought-industries/overview
 - type: AgenticAccess
   url: agentic-access/thought-industries-agentic-access.yml
 - type: TrustCenter
