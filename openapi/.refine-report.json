@@ -1,0 +1,24 @@
+{
+  "provider": "thought-industries",
+  "sources": [
+    "thought-industries-content-api-openapi.yml",
+    "thought-industries-courses-api-openapi.yml",
+    "thought-industries-enrollments-api-openapi.yml",
+    "thought-industries-groups-api-openapi.yml",
+    "thought-industries-reports-api-openapi.yml",
+    "thought-industries-users-api-openapi.yml"
+  ],
+  "outputs": [
+    "thought-industries-content-api-openapi.yml",
+    "thought-industries-courses-api-openapi.yml",
+    "thought-industries-enrollments-api-openapi.yml",
+    "thought-industries-groups-api-openapi.yml",
+    "thought-industries-reports-api-openapi.yml",
+    "thought-industries-users-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

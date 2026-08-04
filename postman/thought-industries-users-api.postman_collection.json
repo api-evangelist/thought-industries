@@ -1,0 +1,684 @@
+{
+  "info": {
+    "_postman_id": "834cd2fc-95cb-4829-9d4f-db61b682c327",
+    "name": "Thought Industries REST Content Users API",
+    "description": "The Thought Industries REST API v1 provides programmatic access to the Thought Industries B2B learning platform. Enables management of users, courses, enrollments, groups, content, categories, bundles, and reporting. Authentication uses API key via X-API-Key header or apiKey query parameter. Base URL is tenant-scoped per subdomain.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:13:30.000Z",
+    "updatedAt": "2026-07-28T03:13:31.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-834cd2fc-95cb-4829-9d4f-db61b682c327"
+  },
+  "item": [
+    {
+      "name": "users",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Get User",
+              "id": "05ae8955-c43a-4ef0-9807-394b64cfba54",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/users/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "b8dc6a53-7966-4074-b77f-82786521d941",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) User ID."
+                    }
+                  ]
+                },
+                "description": "Returns details for a single user by ID."
+              },
+              "response": [
+                {
+                  "id": "6c256ca3-3e45-410d-93cf-b2c162a92944",
+                  "name": "User details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-Key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"email\": \"<email>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"active\": \"<boolean>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"custom_fields\": {\n      \"ametd6\": true,\n      \"cupidatat0\": -61868866\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T03:13:31.000Z",
+                  "updatedAt": "2026-07-28T03:13:31.000Z",
+                  "uid": "35240-6c256ca3-3e45-410d-93cf-b2c162a92944"
+                },
+                {
+                  "id": "653a294d-f2a2-4b3a-b3d1-6ac5de6b225f",
+                  "name": "User not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-Key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:13:31.000Z",
+                  "updatedAt": "2026-07-28T03:13:31.000Z",
+                  "uid": "35240-653a294d-f2a2-4b3a-b3d1-6ac5de6b225f"
+                }
+              ],
+              "createdAt": "2026-07-28T03:13:31.000Z",
+              "updatedAt": "2026-07-28T03:13:31.000Z",
+              "uid": "35240-05ae8955-c43a-4ef0-9807-394b64cfba54"
+            },
+            {
+              "name": "Update User",
+              "id": "d4e62e5c-3cbd-4e4d-a04c-c90e15e4cf5c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"active\": \"<boolean>\",\n  \"custom_fields\": {\n    \"laboris_97\": 36770270\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "aeba077f-5de8-4ec8-a8b8-788720e69d0c",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) User ID."
+                    }
+                  ]
+                },
+                "description": "Updates a user record. Full object replacement semantics apply. To deactivate a user, set active to false."
+              },
+              "response": [
+                {
+                  "id": "d1c5bfca-3572-489d-a1e2-74b3c822c6ec",
+                  "name": "User updated",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-Key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"active\": \"<boolean>\",\n  \"custom_fields\": {\n    \"laboris_97\": 36770270\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"email\": \"<email>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"active\": \"<boolean>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"custom_fields\": {\n      \"ametd6\": true,\n      \"cupidatat0\": -61868866\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T03:13:31.000Z",
+                  "updatedAt": "2026-07-28T03:13:31.000Z",
+                  "uid": "35240-d1c5bfca-3572-489d-a1e2-74b3c822c6ec"
+                }
+              ],
+              "createdAt": "2026-07-28T03:13:31.000Z",
+              "updatedAt": "2026-07-28T03:13:31.000Z",
+              "uid": "35240-d4e62e5c-3cbd-4e4d-a04c-c90e15e4cf5c"
+            },
+            {
+              "name": "Delete User",
+              "id": "fa8910ed-3110-43fc-b7a6-f701d11e6c7f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/users/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "979ae536-539b-4be5-becd-f6b3d417d25a",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) User ID."
+                    }
+                  ]
+                },
+                "description": "Permanently deletes a user. Deactivation is preferred over deletion."
+              },
+              "response": [
+                {
+                  "id": "4a1a86b6-661e-45b0-b76b-804a4d70d282",
+                  "name": "User deleted",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-Key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:13:31.000Z",
+                  "updatedAt": "2026-07-28T03:13:31.000Z",
+                  "uid": "35240-4a1a86b6-661e-45b0-b76b-804a4d70d282"
+                }
+              ],
+              "createdAt": "2026-07-28T03:13:31.000Z",
+              "updatedAt": "2026-07-28T03:13:31.000Z",
+              "uid": "35240-fa8910ed-3110-43fc-b7a6-f701d11e6c7f"
+            }
+          ],
+          "id": "e7847917-ce08-4251-a02b-72236bb3b97d",
+          "createdAt": "2026-07-28T03:13:31.000Z",
+          "updatedAt": "2026-07-28T03:13:31.000Z",
+          "uid": "35240-e7847917-ce08-4251-a02b-72236bb3b97d"
+        },
+        {
+          "name": "List Users",
+          "id": "1e178f1e-8475-490b-bfcb-f88961c247ca",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users?page=1&per_page=25&email=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users"
+              ],
+              "query": [
+                {
+                  "description": "Page number for pagination.",
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "description": "Number of records per page (max 100).",
+                  "key": "per_page",
+                  "value": "25"
+                },
+                {
+                  "description": "Filter users by email address.",
+                  "key": "email",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Returns a paginated list of all users in the tenant. Default page size is 25. Use page and per_page parameters for pagination."
+          },
+          "response": [
+            {
+              "id": "08c3cbdd-e726-4951-a453-bb41b2047f43",
+              "name": "List of users",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/users?page=1&per_page=25&email=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users"
+                  ],
+                  "query": [
+                    {
+                      "description": "Page number for pagination.",
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Number of records per page (max 100).",
+                      "key": "per_page",
+                      "value": "25"
+                    },
+                    {
+                      "description": "Filter users by email address.",
+                      "key": "email",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"email\": \"<email>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"active\": \"<boolean>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"custom_fields\": {\n        \"Ut69c\": 45958355\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"email\": \"<email>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"active\": \"<boolean>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"custom_fields\": {\n        \"quis_33\": -27844585,\n        \"dolor_b34\": false\n      }\n    }\n  ],\n  \"meta\": {\n    \"total\": \"<integer>\",\n    \"page\": \"<integer>\",\n    \"per_page\": \"<integer>\",\n    \"total_pages\": \"<integer>\"\n  }\n}",
+              "createdAt": "2026-07-28T03:13:31.000Z",
+              "updatedAt": "2026-07-28T03:13:31.000Z",
+              "uid": "35240-08c3cbdd-e726-4951-a453-bb41b2047f43"
+            },
+            {
+              "id": "38a6176e-52c1-48fc-bc0b-86a1f87b88c5",
+              "name": "Unauthorized - invalid or missing API key",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/users?page=1&per_page=25&email=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users"
+                  ],
+                  "query": [
+                    {
+                      "description": "Page number for pagination.",
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Number of records per page (max 100).",
+                      "key": "per_page",
+                      "value": "25"
+                    },
+                    {
+                      "description": "Filter users by email address.",
+                      "key": "email",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T03:13:31.000Z",
+              "updatedAt": "2026-07-28T03:13:31.000Z",
+              "uid": "35240-38a6176e-52c1-48fc-bc0b-86a1f87b88c5"
+            }
+          ],
+          "createdAt": "2026-07-28T03:13:31.000Z",
+          "updatedAt": "2026-07-28T03:13:31.000Z",
+          "uid": "35240-1e178f1e-8475-490b-bfcb-f88961c247ca"
+        },
+        {
+          "name": "Create User",
+          "id": "d09967ef-8f82-49a9-b4cd-47642721d57c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"active\": true,\n  \"custom_fields\": {\n    \"ut11\": -76222636.57595712,\n    \"consectetur_08\": false,\n    \"minim148\": -52532576.6244523\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users"
+              ]
+            },
+            "description": "Creates a new user in the tenant. Email must be unique per tenant."
+          },
+          "response": [
+            {
+              "id": "a2e45cb1-7fb5-49e3-8bf9-fddc2fb14338",
+              "name": "User created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"active\": true,\n  \"custom_fields\": {\n    \"ut11\": -76222636.57595712,\n    \"consectetur_08\": false,\n    \"minim148\": -52532576.6244523\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"email\": \"<email>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"active\": \"<boolean>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"custom_fields\": {\n      \"ametd6\": true,\n      \"cupidatat0\": -61868866\n    }\n  }\n}",
+              "createdAt": "2026-07-28T03:13:31.000Z",
+              "updatedAt": "2026-07-28T03:13:31.000Z",
+              "uid": "35240-a2e45cb1-7fb5-49e3-8bf9-fddc2fb14338"
+            },
+            {
+              "id": "241d665e-183f-4042-a2f3-337d7eceff04",
+              "name": "Validation error - email already exists",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"active\": true,\n  \"custom_fields\": {\n    \"ut11\": -76222636.57595712,\n    \"consectetur_08\": false,\n    \"minim148\": -52532576.6244523\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users"
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T03:13:31.000Z",
+              "updatedAt": "2026-07-28T03:13:31.000Z",
+              "uid": "35240-241d665e-183f-4042-a2f3-337d7eceff04"
+            }
+          ],
+          "createdAt": "2026-07-28T03:13:31.000Z",
+          "updatedAt": "2026-07-28T03:13:31.000Z",
+          "uid": "35240-d09967ef-8f82-49a9-b4cd-47642721d57c"
+        }
+      ],
+      "id": "8c517ec2-c80c-4e8c-bdcf-b3a050bf060d",
+      "createdAt": "2026-07-28T03:13:31.000Z",
+      "updatedAt": "2026-07-28T03:13:31.000Z",
+      "uid": "35240-8c517ec2-c80c-4e8c-bdcf-b3a050bf060d"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-Key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "subdomain",
+      "value": "yourtenant"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{subdomain}}.thoughtindustries.com/incoming/api/v1"
+    }
+  ]
+}

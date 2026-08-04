@@ -1,0 +1,169 @@
+{
+  "info": {
+    "_postman_id": "2f557992-5818-4605-81a1-a31e27586b83",
+    "name": "Thought Industries REST Content Reports API",
+    "description": "The Thought Industries REST API v1 provides programmatic access to the Thought Industries B2B learning platform. Enables management of users, courses, enrollments, groups, content, categories, bundles, and reporting. Authentication uses API key via X-API-Key header or apiKey query parameter. Base URL is tenant-scoped per subdomain.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:13:30.000Z",
+    "updatedAt": "2026-07-28T03:13:30.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2f557992-5818-4605-81a1-a31e27586b83"
+  },
+  "item": [
+    {
+      "name": "reports",
+      "item": [
+        {
+          "name": "learning-path-actions",
+          "item": [
+            {
+              "name": "Get Learning Path Actions Report",
+              "id": "18314d7d-8b1e-43ad-80d5-be6573c69bde",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/reports/learning-path-actions?start_date=<date>&end_date=<date>&page=1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports",
+                    "learning-path-actions"
+                  ],
+                  "query": [
+                    {
+                      "description": "Report start date.",
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "Report end date.",
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ]
+                },
+                "description": "Returns learning path enrollment actions including Panorama enrollments and main site enrollments."
+              },
+              "response": [
+                {
+                  "id": "8a947268-28f6-4231-9072-937ef282c8ac",
+                  "name": "Learning path actions report",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-API-Key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reports/learning-path-actions?start_date=<date>&end_date=<date>&page=1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reports",
+                        "learning-path-actions"
+                      ],
+                      "query": [
+                        {
+                          "description": "Report start date.",
+                          "key": "start_date",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "Report end date.",
+                          "key": "end_date",
+                          "value": "<date>"
+                        },
+                        {
+                          "key": "page",
+                          "value": "1"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"dolore_3e\": \"tempor do\",\n      \"enim_af\": \"officia dolore magna sunt\"\n    },\n    {\n      \"proident_83_\": 12085102.308129206,\n      \"occaecat567\": true,\n      \"ipsum_fc1\": \"minim eu occaecat\",\n      \"estb\": 58999097.902339935\n    }\n  ],\n  \"meta\": {\n    \"total\": \"<integer>\",\n    \"page\": \"<integer>\",\n    \"per_page\": \"<integer>\",\n    \"total_pages\": \"<integer>\"\n  }\n}",
+                  "createdAt": "2026-07-28T03:13:30.000Z",
+                  "updatedAt": "2026-07-28T03:13:30.000Z",
+                  "uid": "35240-8a947268-28f6-4231-9072-937ef282c8ac"
+                }
+              ],
+              "createdAt": "2026-07-28T03:13:30.000Z",
+              "updatedAt": "2026-07-28T03:13:30.000Z",
+              "uid": "35240-18314d7d-8b1e-43ad-80d5-be6573c69bde"
+            }
+          ],
+          "id": "389e0125-9461-498f-bdbc-b506db43210a",
+          "createdAt": "2026-07-28T03:13:30.000Z",
+          "updatedAt": "2026-07-28T03:13:30.000Z",
+          "uid": "35240-389e0125-9461-498f-bdbc-b506db43210a"
+        }
+      ],
+      "id": "825668d6-9ad5-4e50-9790-7b42f461ad87",
+      "createdAt": "2026-07-28T03:13:30.000Z",
+      "updatedAt": "2026-07-28T03:13:30.000Z",
+      "uid": "35240-825668d6-9ad5-4e50-9790-7b42f461ad87"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-Key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "subdomain",
+      "value": "yourtenant"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{subdomain}}.thoughtindustries.com/incoming/api/v1"
+    }
+  ]
+}
