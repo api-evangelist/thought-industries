@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thought Industries REST Content Courses API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Courses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Courses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.thoughtindustries.com/incoming/api/v1/courses",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by course status."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of all courses in the tenant."
+        },
+        {
+          "info": {
+            "name": "Get Course",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.thoughtindustries.com/incoming/api/v1/courses/:courseId",
+            "params": [
+              {
+                "name": "courseId",
+                "value": "",
+                "type": "path",
+                "description": "Course ID."
+              }
+            ]
+          },
+          "docs": "Returns details for a specific course."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

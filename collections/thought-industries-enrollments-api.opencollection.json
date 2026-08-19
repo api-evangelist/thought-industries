@@ -1,0 +1,101 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thought Industries REST Content Enrollments API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Enrollments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get User Enrollments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.thoughtindustries.com/incoming/api/v1/users/:id/enrollments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User ID."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns course enrollment data for a specific user."
+        },
+        {
+          "info": {
+            "name": "Enroll User in Course",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{subdomain}.thoughtindustries.com/incoming/api/v1/courses/:courseId/enrollments",
+            "params": [
+              {
+                "name": "courseId",
+                "value": "",
+                "type": "path",
+                "description": "Course ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enrolls a user in a course. The course must be published and the user must be active before calling this endpoint."
+        },
+        {
+          "info": {
+            "name": "Bulk Remove User Access",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{subdomain}.thoughtindustries.com/incoming/api/v1/courses/:courseId/enrollments/bulk-remove",
+            "params": [
+              {
+                "name": "courseId",
+                "value": "",
+                "type": "path",
+                "description": "Course ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes access for multiple learners from a course or learning path without affecting their existing access elsewhere."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

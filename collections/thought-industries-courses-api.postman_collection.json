@@ -1,0 +1,288 @@
+{
+  "item": [
+    {
+      "id": "4ee7a5e7-3ac5-4c46-8923-2fb7a9f8820f",
+      "name": "Courses",
+      "description": {
+        "content": "Course management and content",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8355658d-aee6-4080-ab5c-c83fd56c1792",
+          "name": "List Courses",
+          "request": {
+            "name": "List Courses",
+            "description": {
+              "content": "Returns a paginated list of all courses in the tenant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "courses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "25"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by course status."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your Thought Industries tenant subdomain",
+                  "type": "any",
+                  "value": "{{subdomain}}",
+                  "key": "subdomain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5b151d6b-1ecf-41b7-b492-e60bc28068ca",
+              "name": "List of courses",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "courses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "25"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your Thought Industries tenant subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"title\": \"string\",\n      \"description\": \"string\",\n      \"status\": \"published\",\n      \"category_id\": \"string\",\n      \"created_at\": \"1973-02-26T00:29:20.663Z\",\n      \"updated_at\": \"1969-11-09T00:21:44.280Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"title\": \"string\",\n      \"description\": \"string\",\n      \"status\": \"archived\",\n      \"category_id\": \"string\",\n      \"created_at\": \"1956-01-02T03:43:33.471Z\",\n      \"updated_at\": \"2025-05-17T14:09:16.395Z\"\n    }\n  ],\n  \"meta\": {\n    \"total\": 7991,\n    \"page\": 4427,\n    \"per_page\": 9274,\n    \"total_pages\": 5483\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3720741e-93d9-47f9-ac8e-a02cc38c4067",
+          "name": "Get Course",
+          "request": {
+            "name": "Get Course",
+            "description": {
+              "content": "Returns details for a specific course.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "courses",
+                ":courseId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "courseId",
+                  "description": "(Required) Course ID."
+                },
+                {
+                  "description": "Your Thought Industries tenant subdomain",
+                  "type": "any",
+                  "value": "{{subdomain}}",
+                  "key": "subdomain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8edf9591-b67c-49a6-93ce-9e489c7be958",
+              "name": "Course details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "courses",
+                    ":courseId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "courseId",
+                      "description": "(Required) Course ID."
+                    },
+                    {
+                      "description": "Your Thought Industries tenant subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"title\": \"string\",\n    \"description\": \"string\",\n    \"status\": \"archived\",\n    \"category_id\": \"string\",\n    \"created_at\": \"1957-07-29T04:37:43.213Z\",\n    \"updated_at\": \"1997-12-12T19:08:13.478Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Thought Industries tenant subdomain",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "yourtenant",
+      "key": "subdomain"
+    },
+    {
+      "type": "string",
+      "value": "https://{{subdomain}}.thoughtindustries.com/incoming/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d9437402-1a09-4491-99ca-a1f697254a49",
+    "name": "Thought Industries REST Content Courses API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Thought Industries REST API v1 provides programmatic access to the Thought Industries B2B learning platform. Enables management of users, courses, enrollments, groups, content, categories, bundles, and reporting. Authentication uses API key via X-API-Key header or apiKey query parameter. Base URL is tenant-scoped per subdomain.",
+      "type": "text/plain"
+    }
+  }
+}

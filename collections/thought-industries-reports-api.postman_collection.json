@@ -1,0 +1,183 @@
+{
+  "item": [
+    {
+      "id": "1ff9720a-f613-4beb-bfa7-5e5da86fff81",
+      "name": "Reports",
+      "description": {
+        "content": "Analytics and reporting",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fe30417f-10f6-4b57-881c-bf58e78b517c",
+          "name": "Get Learning Path Actions Report",
+          "request": {
+            "name": "Get Learning Path Actions Report",
+            "description": {
+              "content": "Returns learning path enrollment actions including Panorama enrollments and main site enrollments.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "reports",
+                "learning-path-actions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<date>",
+                  "description": "Report start date."
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<date>",
+                  "description": "Report end date."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your Thought Industries tenant subdomain",
+                  "type": "any",
+                  "value": "{{subdomain}}",
+                  "key": "subdomain"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4682d4a8-263a-4c70-bf7f-3778de818503",
+              "name": "Learning path actions report",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reports",
+                    "learning-path-actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your Thought Industries tenant subdomain",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"key_0\": 9329.264110478296,\n      \"key_1\": 5828.1689202507005,\n      \"key_2\": 9427\n    },\n    {\n      \"key_0\": false,\n      \"key_1\": 1609.8764056899838\n    }\n  ],\n  \"meta\": {\n    \"total\": 5506,\n    \"page\": 6436,\n    \"per_page\": 821,\n    \"total_pages\": 5472\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Thought Industries tenant subdomain",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "yourtenant",
+      "key": "subdomain"
+    },
+    {
+      "type": "string",
+      "value": "https://{{subdomain}}.thoughtindustries.com/incoming/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "cdb37413-7e8a-4283-89aa-dee04a8298ee",
+    "name": "Thought Industries REST Content Reports API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Thought Industries REST API v1 provides programmatic access to the Thought Industries B2B learning platform. Enables management of users, courses, enrollments, groups, content, categories, bundles, and reporting. Authentication uses API key via X-API-Key header or apiKey query parameter. Base URL is tenant-scoped per subdomain.",
+      "type": "text/plain"
+    }
+  }
+}
