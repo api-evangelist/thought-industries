@@ -120,6 +120,8 @@ apis:
   humanURL: https://developer.thoughtindustries.com/
   baseURL: https://{subdomain}.thoughtindustries.com/incoming/api/v1
   tags:
+  - Group
+  tags_raw:
   - Groups
   properties:
   - type: OpenAPI
@@ -160,6 +162,8 @@ apis:
   humanURL: https://developer.thoughtindustries.com/
   baseURL: https://{subdomain}.thoughtindustries.com/incoming/api/v1
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
