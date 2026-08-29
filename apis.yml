@@ -190,6 +190,9 @@ apis:
   - type: JSONSchema
     url: json-schema/thought-industries-enrollment-schema.json
 common:
+- type: CapabilityMap
+  url: capabilities/thought-industries-capability-edges.yml
+  name: Thought Industries Business Capability Map
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/thought-industries/overview
 - type: AgenticAccess

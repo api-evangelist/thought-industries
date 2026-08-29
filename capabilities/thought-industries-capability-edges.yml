@@ -1,0 +1,26 @@
+slug: thought-industries
+provider: Thought Industries
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Education
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Enrollments
+  spec_file: thought-industries-enrollments-api-openapi.yml
+  capability_id: BC-4720.10
+  capability_id_l1: BC-4720
+  capability_name: Enrolment & Registration
+  confidence: 0.88
+  evidence: POST /courses/{courseId}/enrollments enrollUser Enroll User in Course; GET /users/{id}/enrollments
+    Get User Enrollments; POST /courses/{courseId}/enrollments/bulk-remove Bulk Remove User Access
+  reason: Operations enrol learners into courses, list a learner's enrolments and remove enrolment access
+    — course registration of learners. Clearly enrolment and registration; slight reservation only because
+    a corporate-training context also touches entitlement provisioning.
