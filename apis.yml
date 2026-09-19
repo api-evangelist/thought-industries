@@ -112,6 +112,8 @@ apis:
   humanURL: https://developer.thoughtindustries.com/
   baseURL: https://{subdomain}.thoughtindustries.com/incoming/api/v1
   tags:
+  - Enrollment
+  tags_raw:
   - Enrollments
   properties:
   - type: OpenAPI
