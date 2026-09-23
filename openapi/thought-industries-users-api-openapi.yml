@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Thought Industries REST Content Users API
+  title: Thought Industries REST Users API
   description: The Thought Industries REST API v1 provides programmatic access to the Thought Industries B2B learning platform. Enables management of users, courses, enrollments, groups, content, categories, bundles, and reporting. Authentication uses API key via X-API-Key header or apiKey query parameter. Base URL is tenant-scoped per subdomain.
   version: '1.0'
   contact:
@@ -146,6 +146,44 @@ paths:
           description: User deleted
 components:
   schemas:
+    UserListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    PaginationMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total_pages:
+          type: integer
+    CreateUserRequest:
+      type: object
+      required:
+      - email
+      properties:
+        email:
+          type: string
+          format: email
+        first_name:
+          type: string
+        last_name:
+          type: string
+        active:
+          type: boolean
+          default: true
+        custom_fields:
+          type: object
+          additionalProperties: true
     User:
       type: object
       properties:
@@ -169,24 +207,11 @@ components:
         custom_fields:
           type: object
           additionalProperties: true
-    CreateUserRequest:
+    UserResponse:
       type: object
-      required:
-      - email
       properties:
-        email:
-          type: string
-          format: email
-        first_name:
-          type: string
-        last_name:
-          type: string
-        active:
-          type: boolean
-          default: true
-        custom_fields:
-          type: object
-          additionalProperties: true
+        data:
+          $ref: '#/components/schemas/User'
     UpdateUserRequest:
       type: object
       properties:
@@ -202,31 +227,6 @@ components:
         custom_fields:
           type: object
           additionalProperties: true
-    PaginationMeta:
-      type: object
-      properties:
-        total:
-          type: integer
-        page:
-          type: integer
-        per_page:
-          type: integer
-        total_pages:
-          type: integer
-    UserListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/User'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
-    UserResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/User'
   securitySchemes:
     ApiKeyHeader:
       type: apiKey

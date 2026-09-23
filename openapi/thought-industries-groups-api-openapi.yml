@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Thought Industries REST Content Groups API
+  title: Thought Industries REST Groups API
   description: The Thought Industries REST API v1 provides programmatic access to the Thought Industries B2B learning platform. Enables management of users, courses, enrollments, groups, content, categories, bundles, and reporting. Authentication uses API key via X-API-Key header or apiKey query parameter. Base URL is tenant-scoped per subdomain.
   version: '1.0'
   contact:
@@ -77,24 +77,17 @@ paths:
                 $ref: '#/components/schemas/GroupMembershipResponse'
 components:
   schemas:
-    GroupMembershipResponse:
+    PaginationMeta:
       type: object
       properties:
-        user_id:
-          type: string
-        group_id:
-          type: string
-        added_at:
-          type: string
-          format: date-time
-    AddUserToGroupRequest:
-      type: object
-      required:
-      - user_id
-      properties:
-        user_id:
-          type: string
-          description: The ID of the user to add to the group.
+        total:
+          type: integer
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total_pages:
+          type: integer
     GroupListResponse:
       type: object
       properties:
@@ -118,17 +111,24 @@ components:
         created_at:
           type: string
           format: date-time
-    PaginationMeta:
+    GroupMembershipResponse:
       type: object
       properties:
-        total:
-          type: integer
-        page:
-          type: integer
-        per_page:
-          type: integer
-        total_pages:
-          type: integer
+        user_id:
+          type: string
+        group_id:
+          type: string
+        added_at:
+          type: string
+          format: date-time
+    AddUserToGroupRequest:
+      type: object
+      required:
+      - user_id
+      properties:
+        user_id:
+          type: string
+          description: The ID of the user to add to the group.
   securitySchemes:
     ApiKeyHeader:
       type: apiKey

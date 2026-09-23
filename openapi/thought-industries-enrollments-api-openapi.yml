@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Thought Industries REST Content Enrollments API
+  title: Thought Industries REST Enrollments API
   description: The Thought Industries REST API v1 provides programmatic access to the Thought Industries B2B learning platform. Enables management of users, courses, enrollments, groups, content, categories, bundles, and reporting. Authentication uses API key via X-API-Key header or apiKey query parameter. Base URL is tenant-scoped per subdomain.
   version: '1.0'
   contact:
@@ -112,49 +112,6 @@ paths:
                 $ref: '#/components/schemas/BulkOperationResponse'
 components:
   schemas:
-    EnrollmentResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Enrollment'
-    EnrollmentListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Enrollment'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
-    EnrollUserRequest:
-      type: object
-      required:
-      - user_id
-      properties:
-        user_id:
-          type: string
-          description: The ID of the user to enroll.
-    BulkOperationResponse:
-      type: object
-      properties:
-        removed:
-          type: integer
-        failed:
-          type: integer
-        errors:
-          type: array
-          items:
-            type: string
-    BulkRemoveRequest:
-      type: object
-      required:
-      - user_ids
-      properties:
-        user_ids:
-          type: array
-          items:
-            type: string
-          description: List of user IDs to remove access from.
     PaginationMeta:
       type: object
       properties:
@@ -166,6 +123,29 @@ components:
           type: integer
         total_pages:
           type: integer
+    EnrollmentResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Enrollment'
+    BulkRemoveRequest:
+      type: object
+      required:
+      - user_ids
+      properties:
+        user_ids:
+          type: array
+          items:
+            type: string
+          description: List of user IDs to remove access from.
+    EnrollUserRequest:
+      type: object
+      required:
+      - user_id
+      properties:
+        user_id:
+          type: string
+          description: The ID of the user to enroll.
     Enrollment:
       type: object
       properties:
@@ -191,6 +171,26 @@ components:
         completed_at:
           type: string
           format: date-time
+    BulkOperationResponse:
+      type: object
+      properties:
+        removed:
+          type: integer
+        failed:
+          type: integer
+        errors:
+          type: array
+          items:
+            type: string
+    EnrollmentListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Enrollment'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
   securitySchemes:
     ApiKeyHeader:
       type: apiKey

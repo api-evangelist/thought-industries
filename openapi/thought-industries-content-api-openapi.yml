@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Thought Industries REST Content API
   description: The Thought Industries REST API v1 provides programmatic access to the Thought Industries B2B learning platform. Enables management of users, courses, enrollments, groups, content, categories, bundles, and reporting. Authentication uses API key via X-API-Key header or apiKey query parameter. Base URL is tenant-scoped per subdomain.
@@ -69,24 +69,17 @@ paths:
                 $ref: '#/components/schemas/CategoryListResponse'
 components:
   schemas:
-    Category:
+    PaginationMeta:
       type: object
       properties:
-        id:
-          type: string
-        name:
-          type: string
-        parent_id:
-          type: string
-    ContentListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContentItem'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
+        total:
+          type: integer
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total_pages:
+          type: integer
     ContentItem:
       type: object
       properties:
@@ -103,17 +96,15 @@ components:
         created_at:
           type: string
           format: date-time
-    PaginationMeta:
+    Category:
       type: object
       properties:
-        total:
-          type: integer
-        page:
-          type: integer
-        per_page:
-          type: integer
-        total_pages:
-          type: integer
+        id:
+          type: string
+        name:
+          type: string
+        parent_id:
+          type: string
     CategoryListResponse:
       type: object
       properties:
@@ -121,6 +112,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Category'
+    ContentListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentItem'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
   securitySchemes:
     ApiKeyHeader:
       type: apiKey
