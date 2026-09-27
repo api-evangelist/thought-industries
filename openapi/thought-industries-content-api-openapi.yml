@@ -69,6 +69,15 @@ paths:
                 $ref: '#/components/schemas/CategoryListResponse'
 components:
   schemas:
+    Category:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        parent_id:
+          type: string
     PaginationMeta:
       type: object
       properties:
@@ -96,15 +105,6 @@ components:
         created_at:
           type: string
           format: date-time
-    Category:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        parent_id:
-          type: string
     CategoryListResponse:
       type: object
       properties:

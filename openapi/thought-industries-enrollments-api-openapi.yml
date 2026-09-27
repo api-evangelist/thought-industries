@@ -112,40 +112,6 @@ paths:
                 $ref: '#/components/schemas/BulkOperationResponse'
 components:
   schemas:
-    PaginationMeta:
-      type: object
-      properties:
-        total:
-          type: integer
-        page:
-          type: integer
-        per_page:
-          type: integer
-        total_pages:
-          type: integer
-    EnrollmentResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Enrollment'
-    BulkRemoveRequest:
-      type: object
-      required:
-      - user_ids
-      properties:
-        user_ids:
-          type: array
-          items:
-            type: string
-          description: List of user IDs to remove access from.
-    EnrollUserRequest:
-      type: object
-      required:
-      - user_id
-      properties:
-        user_id:
-          type: string
-          description: The ID of the user to enroll.
     Enrollment:
       type: object
       properties:
@@ -171,6 +137,17 @@ components:
         completed_at:
           type: string
           format: date-time
+    PaginationMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total_pages:
+          type: integer
     BulkOperationResponse:
       type: object
       properties:
@@ -182,6 +159,16 @@ components:
           type: array
           items:
             type: string
+    BulkRemoveRequest:
+      type: object
+      required:
+      - user_ids
+      properties:
+        user_ids:
+          type: array
+          items:
+            type: string
+          description: List of user IDs to remove access from.
     EnrollmentListResponse:
       type: object
       properties:
@@ -191,6 +178,19 @@ components:
             $ref: '#/components/schemas/Enrollment'
         meta:
           $ref: '#/components/schemas/PaginationMeta'
+    EnrollmentResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Enrollment'
+    EnrollUserRequest:
+      type: object
+      required:
+      - user_id
+      properties:
+        user_id:
+          type: string
+          description: The ID of the user to enroll.
   securitySchemes:
     ApiKeyHeader:
       type: apiKey

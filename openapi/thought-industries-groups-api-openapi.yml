@@ -97,6 +97,24 @@ components:
             $ref: '#/components/schemas/Group'
         meta:
           $ref: '#/components/schemas/PaginationMeta'
+    AddUserToGroupRequest:
+      type: object
+      required:
+      - user_id
+      properties:
+        user_id:
+          type: string
+          description: The ID of the user to add to the group.
+    GroupMembershipResponse:
+      type: object
+      properties:
+        user_id:
+          type: string
+        group_id:
+          type: string
+        added_at:
+          type: string
+          format: date-time
     Group:
       type: object
       properties:
@@ -111,24 +129,6 @@ components:
         created_at:
           type: string
           format: date-time
-    GroupMembershipResponse:
-      type: object
-      properties:
-        user_id:
-          type: string
-        group_id:
-          type: string
-        added_at:
-          type: string
-          format: date-time
-    AddUserToGroupRequest:
-      type: object
-      required:
-      - user_id
-      properties:
-        user_id:
-          type: string
-          description: The ID of the user to add to the group.
   securitySchemes:
     ApiKeyHeader:
       type: apiKey

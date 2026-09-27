@@ -57,6 +57,16 @@ paths:
                 $ref: '#/components/schemas/ReportResponse'
 components:
   schemas:
+    ReportResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
     PaginationMeta:
       type: object
       properties:
@@ -68,16 +78,6 @@ components:
           type: integer
         total_pages:
           type: integer
-    ReportResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
   securitySchemes:
     ApiKeyHeader:
       type: apiKey
