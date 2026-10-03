@@ -77,26 +77,6 @@ paths:
                 $ref: '#/components/schemas/GroupMembershipResponse'
 components:
   schemas:
-    PaginationMeta:
-      type: object
-      properties:
-        total:
-          type: integer
-        page:
-          type: integer
-        per_page:
-          type: integer
-        total_pages:
-          type: integer
-    GroupListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Group'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
     AddUserToGroupRequest:
       type: object
       required:
@@ -115,6 +95,15 @@ components:
         added_at:
           type: string
           format: date-time
+    GroupListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
     Group:
       type: object
       properties:
@@ -129,6 +118,17 @@ components:
         created_at:
           type: string
           format: date-time
+    PaginationMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total_pages:
+          type: integer
   securitySchemes:
     ApiKeyHeader:
       type: apiKey

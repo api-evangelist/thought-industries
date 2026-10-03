@@ -69,26 +69,6 @@ paths:
                 $ref: '#/components/schemas/CategoryListResponse'
 components:
   schemas:
-    Category:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        parent_id:
-          type: string
-    PaginationMeta:
-      type: object
-      properties:
-        total:
-          type: integer
-        page:
-          type: integer
-        per_page:
-          type: integer
-        total_pages:
-          type: integer
     ContentItem:
       type: object
       properties:
@@ -121,6 +101,26 @@ components:
             $ref: '#/components/schemas/ContentItem'
         meta:
           $ref: '#/components/schemas/PaginationMeta'
+    PaginationMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total_pages:
+          type: integer
+    Category:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        parent_id:
+          type: string
   securitySchemes:
     ApiKeyHeader:
       type: apiKey
