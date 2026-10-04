@@ -69,22 +69,17 @@ paths:
                 $ref: '#/components/schemas/CategoryListResponse'
 components:
   schemas:
-    ContentItem:
+    PaginationMeta:
       type: object
       properties:
-        id:
-          type: string
-        title:
-          type: string
-        content_type:
-          type: string
-        category_id:
-          type: string
-        status:
-          type: string
-        created_at:
-          type: string
-          format: date-time
+        total:
+          type: integer
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total_pages:
+          type: integer
     CategoryListResponse:
       type: object
       properties:
@@ -101,17 +96,22 @@ components:
             $ref: '#/components/schemas/ContentItem'
         meta:
           $ref: '#/components/schemas/PaginationMeta'
-    PaginationMeta:
+    ContentItem:
       type: object
       properties:
-        total:
-          type: integer
-        page:
-          type: integer
-        per_page:
-          type: integer
-        total_pages:
-          type: integer
+        id:
+          type: string
+        title:
+          type: string
+        content_type:
+          type: string
+        category_id:
+          type: string
+        status:
+          type: string
+        created_at:
+          type: string
+          format: date-time
     Category:
       type: object
       properties:

@@ -81,11 +81,26 @@ paths:
                 $ref: '#/components/schemas/CourseResponse'
 components:
   schemas:
-    CourseResponse:
+    PaginationMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total_pages:
+          type: integer
+    CourseListResponse:
       type: object
       properties:
         data:
-          $ref: '#/components/schemas/Course'
+          type: array
+          items:
+            $ref: '#/components/schemas/Course'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
     Course:
       type: object
       properties:
@@ -109,26 +124,11 @@ components:
         updated_at:
           type: string
           format: date-time
-    PaginationMeta:
-      type: object
-      properties:
-        total:
-          type: integer
-        page:
-          type: integer
-        per_page:
-          type: integer
-        total_pages:
-          type: integer
-    CourseListResponse:
+    CourseResponse:
       type: object
       properties:
         data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Course'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
+          $ref: '#/components/schemas/Course'
   securitySchemes:
     ApiKeyHeader:
       type: apiKey

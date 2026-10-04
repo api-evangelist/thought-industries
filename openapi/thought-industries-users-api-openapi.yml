@@ -146,11 +146,6 @@ paths:
           description: User deleted
 components:
   schemas:
-    UserResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/User'
     UserListResponse:
       type: object
       properties:
@@ -160,6 +155,22 @@ components:
             $ref: '#/components/schemas/User'
         meta:
           $ref: '#/components/schemas/PaginationMeta'
+    UserResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/User'
+    PaginationMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total_pages:
+          type: integer
     CreateUserRequest:
       type: object
       required:
@@ -201,17 +212,6 @@ components:
         custom_fields:
           type: object
           additionalProperties: true
-    PaginationMeta:
-      type: object
-      properties:
-        total:
-          type: integer
-        page:
-          type: integer
-        per_page:
-          type: integer
-        total_pages:
-          type: integer
     UpdateUserRequest:
       type: object
       properties:

@@ -77,6 +77,17 @@ paths:
                 $ref: '#/components/schemas/GroupMembershipResponse'
 components:
   schemas:
+    PaginationMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total_pages:
+          type: integer
     AddUserToGroupRequest:
       type: object
       required:
@@ -85,6 +96,15 @@ components:
         user_id:
           type: string
           description: The ID of the user to add to the group.
+    GroupListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
     GroupMembershipResponse:
       type: object
       properties:
@@ -95,15 +115,6 @@ components:
         added_at:
           type: string
           format: date-time
-    GroupListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Group'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
     Group:
       type: object
       properties:
@@ -118,17 +129,6 @@ components:
         created_at:
           type: string
           format: date-time
-    PaginationMeta:
-      type: object
-      properties:
-        total:
-          type: integer
-        page:
-          type: integer
-        per_page:
-          type: integer
-        total_pages:
-          type: integer
   securitySchemes:
     ApiKeyHeader:
       type: apiKey

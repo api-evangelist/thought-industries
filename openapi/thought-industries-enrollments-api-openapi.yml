@@ -112,41 +112,6 @@ paths:
                 $ref: '#/components/schemas/BulkOperationResponse'
 components:
   schemas:
-    BulkRemoveRequest:
-      type: object
-      required:
-      - user_ids
-      properties:
-        user_ids:
-          type: array
-          items:
-            type: string
-          description: List of user IDs to remove access from.
-    EnrollmentListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Enrollment'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
-    BulkOperationResponse:
-      type: object
-      properties:
-        removed:
-          type: integer
-        failed:
-          type: integer
-        errors:
-          type: array
-          items:
-            type: string
-    EnrollmentResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Enrollment'
     Enrollment:
       type: object
       properties:
@@ -172,14 +137,6 @@ components:
         completed_at:
           type: string
           format: date-time
-    EnrollUserRequest:
-      type: object
-      required:
-      - user_id
-      properties:
-        user_id:
-          type: string
-          description: The ID of the user to enroll.
     PaginationMeta:
       type: object
       properties:
@@ -191,6 +148,49 @@ components:
           type: integer
         total_pages:
           type: integer
+    EnrollUserRequest:
+      type: object
+      required:
+      - user_id
+      properties:
+        user_id:
+          type: string
+          description: The ID of the user to enroll.
+    BulkRemoveRequest:
+      type: object
+      required:
+      - user_ids
+      properties:
+        user_ids:
+          type: array
+          items:
+            type: string
+          description: List of user IDs to remove access from.
+    BulkOperationResponse:
+      type: object
+      properties:
+        removed:
+          type: integer
+        failed:
+          type: integer
+        errors:
+          type: array
+          items:
+            type: string
+    EnrollmentListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Enrollment'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    EnrollmentResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Enrollment'
   securitySchemes:
     ApiKeyHeader:
       type: apiKey
