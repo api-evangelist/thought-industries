@@ -193,6 +193,12 @@ apis:
   - type: JSONSchema
     url: json-schema/thought-industries-enrollment-schema.json
 common:
+- type: Plans
+  url: plans/thought-industries-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/thought-industries-rate-limits.yml
+- type: FinOps
+  url: finops/thought-industries-finops.yml
 - type: CapabilityMap
   url: capabilities/thought-industries-capability-edges.yml
   name: Thought Industries Business Capability Map
