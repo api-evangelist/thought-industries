@@ -146,49 +146,6 @@ paths:
           description: User deleted
 components:
   schemas:
-    UserListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/User'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
-    UserResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/User'
-    PaginationMeta:
-      type: object
-      properties:
-        total:
-          type: integer
-        page:
-          type: integer
-        per_page:
-          type: integer
-        total_pages:
-          type: integer
-    CreateUserRequest:
-      type: object
-      required:
-      - email
-      properties:
-        email:
-          type: string
-          format: email
-        first_name:
-          type: string
-        last_name:
-          type: string
-        active:
-          type: boolean
-          default: true
-        custom_fields:
-          type: object
-          additionalProperties: true
     User:
       type: object
       properties:
@@ -212,6 +169,11 @@ components:
         custom_fields:
           type: object
           additionalProperties: true
+    UserResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/User'
     UpdateUserRequest:
       type: object
       properties:
@@ -227,6 +189,44 @@ components:
         custom_fields:
           type: object
           additionalProperties: true
+    UserListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    CreateUserRequest:
+      type: object
+      required:
+      - email
+      properties:
+        email:
+          type: string
+          format: email
+        first_name:
+          type: string
+        last_name:
+          type: string
+        active:
+          type: boolean
+          default: true
+        custom_fields:
+          type: object
+          additionalProperties: true
+    PaginationMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total_pages:
+          type: integer
   securitySchemes:
     ApiKeyHeader:
       type: apiKey
