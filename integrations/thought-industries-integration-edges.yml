@@ -1,4 +1,21 @@
 edges:
+- partner_name: Zendesk (own)
+  partner: zendesk
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://www.zendesk.com/marketplace/apps/support/231736/thought-industries/
+  mirror_of: zendesk/integrations/zendesk-integration-edges.yml
+  apps:
+  - Thought Industries
+  listing_count: 1
+  detected: '2026-10-20'
+  detected_by: mirror-platform-listings.py
+  category: Knowledge and Content Management
 - partner_name: Zoom (own)
   partner: zoom
   partner_match: mirror
@@ -21,4 +38,5 @@ method: searched
 source:
 - zoom/integrations/zoom-integration-edges.yml
 checked:
+- zendesk/integrations/zendesk-integration-edges.yml
 - zoom/integrations/zoom-integration-edges.yml
