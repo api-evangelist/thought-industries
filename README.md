@@ -1,4 +1,4 @@
-# Thought Industries (thought-industries)
+# Thought Industries
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,93 +66,181 @@
 
 Thought Industries is a B2B learning platform (LMS/LXP) providing REST and GraphQL APIs for programmatic access to courses, users, enrollments, content management, and reporting. Their developer portal enables integration of learning experiences into enterprise workflows with webhook support and comprehensive API coverage for user lifecycle, content, and analytics.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/thought-industries/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/thought-industries/refs/heads/main/apis.yml)
+**Areas:** Education · Learning · LMS · LXP · E-Learning · Training
 
-## Scope
+## Thought Industries on APIs.io
 
-- **Type:** Index
-- **Position:** Consumer
-- **Access:** 3rd-Party
+Everything profiled for Thought Industries is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/thought-industries/](https://apis.io/providers/thought-industries/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (7)
 
-- Education
-- Learning
-- LMS
-- LXP
-- E-Learning
-- Training
+- [Thought Industries GraphQL API](https://apis.io/apis/thought-industries/graphql-api/) — The Thought Industries GraphQL API provides flexible querying of platform data including courses, users, content, and enrollments. Available at…
+- [Thought Industries Content API](https://apis.io/apis/thought-industries/thought-industries-content-api/) — Learning content and categories
+- [Thought Industries Courses API](https://apis.io/apis/thought-industries/thought-industries-courses-api/) — Course management and content
+- [Thought Industries Enrollments API](https://apis.io/apis/thought-industries/thought-industries-enrollments-api/) — Course enrollment management
+- [Thought Industries Groups API](https://apis.io/apis/thought-industries/thought-industries-groups-api/) — User group management
+- [Thought Industries Reports API](https://apis.io/apis/thought-industries/thought-industries-reports-api/) — Analytics and reporting
+- [Thought Industries Users API](https://apis.io/apis/thought-industries/thought-industries-users-api/) — User lifecycle management
 
-## Timestamps
+### Published properties
 
-- **Created:** 2025-03-01
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### GraphQL (1)
 
-### Thought Industries REST API
+GraphQL schemas.
 
-The Thought Industries REST API v1 provides programmatic access to users, enrollments, courses, groups, content, categories, bundles, reports, and learning paths. Authentication uses API key via X-API-Key header or apiKey query parameter. Base URL is tenant-scoped at https://{subdomain}.thoughtindustries.com/incoming/api/v1/.
+- [Thought Industries GraphQL API](https://apis.io/graphqls/thought-industries/thought-industries-graphql/)
 
-- **Human URL:** [https://developer.thoughtindustries.com/](https://developer.thoughtindustries.com/)
-- **Base URL:** `https://{subdomain}.thoughtindustries.com/incoming/api/v1`
+#### Agentic access (1)
 
-#### Tags
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- Education
-- Learning
-- LMS
-- REST
-- Users
-- Courses
-- Enrollments
+- [Thought Industries Agentic Access](https://apis.io/agentic-access/thought-industries/thought-industries-agentic-access/)
 
-#### Properties
+#### JSON Schema (2)
 
-- [Documentation](https://api.thoughtindustries.com/)
-- [Getting Started](https://developer.thoughtindustries.com/api-tutorials/)
-- [Authentication](https://developer.thoughtindustries.com/api-tutorials/)
-- [OpenAPI](openapi/thought-industries-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/thought-industries.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/thought-industries.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/thought-industries-user-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/thought-industries-enrollment-schema.json) — [JSON Schema](https://json-schema.org/specification)
+The data models the API reads and writes.
 
-### Thought Industries GraphQL API
+- [Enrollment](https://apis.io/schemas/thought-industries/thought-industries-enrollment/)
+- [User](https://apis.io/schemas/thought-industries/thought-industries-user/)
 
-The Thought Industries GraphQL API provides flexible querying of platform data including courses, users, content, and enrollments. Available at /incoming/api/graphql with schema introspection supported. Complements the REST API for complex queries and mutations.
+#### JSON Structure (1)
 
-- **Human URL:** [https://developer.thoughtindustries.com/graphql/](https://developer.thoughtindustries.com/graphql/)
-- **Base URL:** `https://{subdomain}.thoughtindustries.com/incoming/api`
+Data models expressed in JSON Structure.
 
-#### Tags
+- [Thought Industries User Structure](https://apis.io/json-structure/thought-industries/thought-industries-user-structure/)
 
-- GraphQL
-- Learning
-- Education
-- LMS
+#### JSON-LD (1)
 
-#### Properties
+Linked-data contexts for the provider's vocabulary.
 
-- [Documentation](https://developer.thoughtindustries.com/graphql/)
-- [Getting Started](https://developer.thoughtindustries.com/api-tutorials/)
-- [Postman Collection](collections/thought-industries.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/thought-industries.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Thought Industries Context](https://apis.io/jsonld/thought-industries/thought-industries-context/)
 
-## Common Properties
+#### Vocabulary (1)
 
-- [LinkedIn](https://www.linkedin.com/company/thought-industries)
+The provider's domain terms, defined.
+
+- [Thought Industries Vocabulary](https://apis.io/vocabularies/thought-industries/thought-industries-vocabulary/)
+
+#### Examples (2)
+
+Example requests and responses.
+
+- [Thought Industries Enroll User Example](https://apis.io/examples/thought-industries/thought-industries-enroll-user-example/)
+- [Thought Industries List Users Example](https://apis.io/examples/thought-industries/thought-industries-list-users-example/)
+
+#### Collections (13)
+
+Postman and Open Collection request collections.
+
+- [Thought Industries REST API](https://apis.io/collections/thought-industries/open-thought-industries/)
+- [Thought Industries REST Content API](https://apis.io/collections/thought-industries/open-thought-industries-content-api/)
+- [Thought Industries REST Content Courses API](https://apis.io/collections/thought-industries/open-thought-industries-courses-api/)
+- [Thought Industries REST Content Enrollments API](https://apis.io/collections/thought-industries/open-thought-industries-enrollments-api/)
+- [Thought Industries REST Content Groups API](https://apis.io/collections/thought-industries/open-thought-industries-groups-api/)
+- [Thought Industries REST Content Reports API](https://apis.io/collections/thought-industries/open-thought-industries-reports-api/)
+- [Thought Industries REST Content Users API](https://apis.io/collections/thought-industries/open-thought-industries-users-api/)
+- [Thought Industries REST Content API](https://apis.io/collections/thought-industries/postman-thought-industries-content-api/)
+- [Thought Industries REST Content Courses API](https://apis.io/collections/thought-industries/postman-thought-industries-courses-api/)
+- [Thought Industries REST Content Enrollments API](https://apis.io/collections/thought-industries/postman-thought-industries-enrollments-api/)
+- [Thought Industries REST Content Groups API](https://apis.io/collections/thought-industries/postman-thought-industries-groups-api/)
+- [Thought Industries REST Content Reports API](https://apis.io/collections/thought-industries/postman-thought-industries-reports-api/)
+- [Thought Industries REST Content Users API](https://apis.io/collections/thought-industries/postman-thought-industries-users-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Thought Industries — jsonschema rules](https://apis.io/rules/thought-industries/thought-industries-jsonschema-spectral-rules/)
+- [Thought Industries API Rules](https://apis.io/rules/thought-industries/thought-industries-rules/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Thought Industries Authentication](https://apis.io/security/thought-industries/thought-industries-authentication/)
+- [Thought Industries Domain Security](https://apis.io/security/thought-industries/thought-industries-domain-security/)
+- [Thought Industries Trust Center](https://apis.io/security/thought-industries/thought-industries-trust-center/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Thought Industries Plans Pricing](https://apis.io/plans/thought-industries/thought-industries-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Thought Industries Rate Limits](https://apis.io/rate-limits/thought-industries/thought-industries-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Thought Industries Finops](https://apis.io/finops/thought-industries/thought-industries-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.thoughtindustries.com/)
-- [Developer Portal](https://developer.thoughtindustries.com/)
 - [Documentation](https://api.thoughtindustries.com/)
-- [Getting Started](https://developer.thoughtindustries.com/api-tutorials/)
-- [Authentication](https://academy.thoughtindustries.com/courses/api-keys)
-- [GitHub Organization](https://github.com/thoughtindustries)
-- [Webhooks](https://developer.thoughtindustries.com/)
+- [Getting started](https://developer.thoughtindustries.com/api-tutorials/)
 - [Support](https://support.thoughtindustries.com/)
-- [Integrations](https://www.thoughtindustries.com/partners/)
+- [Blog](https://www.thoughtindustries.com/blog/feed/)
+- [GitHub](https://github.com/thoughtindustries)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 37.2** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 62.9 |
+| Contract governance | 13.6 |
+| Operational transparency | 18.4 |
+| Developer ergonomics | 39.3 |
+| Access clarity | 15.8 |
+
+**Agent readiness 21.8** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | unknown |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 21.6** — Education & Research
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/thought-industries/](https://apis.io/providers/thought-industries/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Thought Industries: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/thought-industries/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
